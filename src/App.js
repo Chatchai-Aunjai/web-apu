@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+
+import AppHeader from "./components/common/header";
+
+import { Layout, Breadcrumb } from 'antd';
+import AppBookedContent from "./components/common/bookedContent";
+
+const { Header, Content } = Layout;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Layout class="mainLayout">
+      <Header>
+        <AppHeader/>
+      </Header>
+
+      <Content class="content">
+        <Breadcrumb style={{ margin: '16px 0' }}>
+          <Breadcrumb.Item>หน้าแรก</Breadcrumb.Item>
+          <Breadcrumb.Item>จองคิว</Breadcrumb.Item>
+        </Breadcrumb>
+        <AppBookedContent/>
+      </Content>
+      
+    </Layout>
+  );  
 }
 
 export default App;
