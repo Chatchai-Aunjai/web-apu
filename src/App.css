@@ -103,7 +103,7 @@ p {
 }
 
 
-@media (max-width: 770px) {
+@media (max-width: 670px) {
   .login .container {
     display: none;
   }
@@ -168,7 +168,7 @@ p {
     padding: 10px 10px 0px 10px;
     margin: 0px 0px 20px 0px;
     width: 100%;
-    height: 470px;
+    height: 530px;
     border-radius: 10px;
   }
 
@@ -186,9 +186,27 @@ p {
     padding: 0 10px;
     height: 100%;
   }
+
+  .date {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #date {
+    height: 6px;
+  }
+
+  #time {
+    height: 6px;
+  }
 }
 
 @media (max-width: 350px) {
+  .mainLayout .booked {
+    height: 520px;
+  }
+
   h1 {
     padding: 0px;
     font-size: 18px;
@@ -196,7 +214,7 @@ p {
   }
   
   p {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .queuenow {
@@ -204,8 +222,30 @@ p {
   }
 
   .content {
-    padding: 0 7px;
+    padding: 0 3px;
     height: 100%;
+  }
+
+  .date {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #date {
+    height: 6px;
+  }
+
+  #time {
+    height: 6px;
+  }
+
+}
+
+@media (min-width: 750px) and (max-width: 1030px)  {
+  .mainLayout .booked {
+    padding: 20px 50px 0px 50px;
+    margin: 10px 0px 10px 0px;
   }
 
 }

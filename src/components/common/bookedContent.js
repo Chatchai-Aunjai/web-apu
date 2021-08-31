@@ -46,7 +46,7 @@ function AppBookedContent() {
 
                     <div class="date"><p style={{ padding:"15px 30px 0px 0px" }}>วัน-เวลาที่เกิดอาการ :</p>
                     <form className={classes.container} noValidate>
-                    <TextField
+                    <TextField id="date"
                         style={{ padding:"0px 20px 0px 0px" }}
                         id="date"
                         label="Date"
@@ -56,7 +56,7 @@ function AppBookedContent() {
                     />
                     </form>
                     <form className={classes.container} noValidate>
-                    <TextField
+                    <TextField id="time"
                         id="time"
                         label="Time"
                         type="time"
