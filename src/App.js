@@ -7,6 +7,7 @@ import SignIn from './screens/AdminSignIn'
 import Customers from './screens/Customer';
 import Appointment from './screens/Appointment';
 import Errorpage from './screens/Errorpage';
+import ReactNotification from 'react-notifications-component'
 import { Layout } from 'antd';
 import { firebase } from "./Firebase/firebase";
 import {
@@ -43,7 +44,8 @@ function App() {
   if (isUserSignedIn === true){
     return (
       <section className="hero">
-        <Layout class="mainLayout"> 
+        <Layout class="mainLayout">
+          <ReactNotification/>
           <Routers/>
         </Layout>
       </section>
