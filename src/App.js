@@ -3,7 +3,7 @@ import NavBar from './layouts/NavBar';
 import React, { useState, useEffect } from 'react';
 import Login from './authentication/Login';
 import SignUp from './authentication/SignUp';
-import AdminSignIn from './screens/AdminSignIn'
+import SignIn from './screens/SignIn'
 import Customers from './screens/Customer';
 import Appointment from './screens/Appointment';
 import Errorpage from './screens/Errorpage';
@@ -56,7 +56,7 @@ function App() {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={AdminSignIn}/>
+          <Route exact path="/" component={SignIn}/>
         </Switch>
       </Router>
     );

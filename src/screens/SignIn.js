@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 const { Title } = Typography;
 
-const AdminSignIn = (props) => {
+const SignIn = (props) => {
   const SignInWithFirebase = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithPopup(provider).then((result) => {
@@ -58,7 +58,8 @@ const AdminSignIn = (props) => {
             border: "none",
             width: "95%",
             borderRadius: "20px",
-            height: '50px'
+            height: '50px',
+            cursor: "pointer"
           }}
           onClick={SignInWithFirebase}
         >
@@ -73,4 +74,4 @@ const AdminSignIn = (props) => {
   );
 };
 
-export default AdminSignIn;
+export default SignIn;
