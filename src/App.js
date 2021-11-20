@@ -11,7 +11,7 @@ import ReactNotification from 'react-notifications-component'
 import { Layout } from 'antd';
 import { firebase } from "./Firebase/firebase";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
 } from 'react-router-dom';
