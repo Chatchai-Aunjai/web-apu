@@ -18,7 +18,7 @@ const Routers = () => (
   <div>
     <Router>
       <Switch>
-        <Route exact path="/web-apu/admin">
+        <Route exact path="/admin">
           <NavBar/>
           <Customers/>  
         </Route>
