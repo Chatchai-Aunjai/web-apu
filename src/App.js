@@ -48,7 +48,7 @@ function App() {
     return (
       <Router>
         <Switch>
-          <Route exact path="/web-apu" component={SignIn}/>
+          <Route exact path="/" component={SignIn}/>
         </Switch>
       </Router>
     );
