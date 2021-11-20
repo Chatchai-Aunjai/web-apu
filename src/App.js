@@ -1,31 +1,59 @@
-import React from "react";
-import "./App.css";
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import './App.css';
+import NavBar from './layouts/NavBar';
+import { useState, useEffect } from 'react';
+import Login from './authentication/Login';
+import SignUp from './authentication/SignUp';
+import SignIn from './screens/AdminSignIn'
+import Customers from './screens/Customer';
+import Appointment from './screens/Appointment';
+import { Layout } from 'antd';
+import { firebase } from "./Firebase/firebase";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
 
-import AppHeader from "./components/common/header";
-
-import { Layout, Breadcrumb } from 'antd';
-import AppBookedContent from "./components/common/bookedContent";
-
-const { Header, Content } = Layout;
+const Routers = () => (
+  <div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <NavBar/>
+          <Customers/>  
+        </Route>
+      </Switch>
+    </Router>
+  </div>
+);
 
 function App() {
-  return (
-    <Layout class="mainLayout">
-      <Header>
-        <AppHeader/>
-      </Header>
+  const [isUserSignedIn, setIsUserSignedIn] = useState(true);
+  firebase.auth().onAuthStateChanged((user) => {
+    if(user) {
+      return setIsUserSignedIn(true);
+    }
 
-      <Content class="content">
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>หน้าแรก</Breadcrumb.Item>
-          <Breadcrumb.Item>จองคิว</Breadcrumb.Item>
-        </Breadcrumb>
-        <AppBookedContent/>
-      </Content>
-      
-    </Layout>
-  );  
+    setIsUserSignedIn(false)
+  })
+  if (isUserSignedIn === true){
+    return (
+      <section className="hero">
+        <Layout class="mainLayout"> 
+          <Routers/>
+        </Layout>
+      </section>
+    );
+  } else {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/apu-admin" component={SignIn}/>
+        </Switch>
+      </Router>
+    );
+  }
+ 
 }
 
 export default App;
