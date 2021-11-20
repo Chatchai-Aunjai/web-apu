@@ -49,7 +49,7 @@ const AdminSignIn = (props) => {
               borderRadius: "20px",
             }}
         >
-          <Link to="/">
+          <Link to="/web-apu/admin">
         <button
           type="primary"
           style={{

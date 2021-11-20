@@ -18,7 +18,7 @@ const Routers = () => (
   <div>
     <Router>
       <Switch>
-        <Route exact path="/web-apu">
+        <Route exact path="/web-apu/admin">
           <NavBar/>
           <Customers/>  
         </Route>
@@ -48,7 +48,7 @@ function App() {
     return (
       <Router>
         <Switch>
-          <Route exact path="/apu-admin" component={SignIn}/>
+          <Route exact path="/web-apu" component={SignIn}/>
         </Switch>
       </Router>
     );
