@@ -54,6 +54,19 @@
 .loginlogo {
     width: 100px;
 }
+.hero {
+  width: 100%;
+  min-height: 100vh;
+  background: #99DFB2;
+}
+#error-layout{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
