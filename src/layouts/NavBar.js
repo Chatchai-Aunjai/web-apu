@@ -32,7 +32,7 @@ const NavBar = (props) => {
                     </Typography>
                     {auth && (
                         <div>
-                            <Button color="inherit" onClick={() => signOut()}><Link to="/web-apu">
+                            <Button color="inherit" onClick={() => signOut()}><Link to="/">
                                 ออกจากระบบ
                             </Link></Button> 
                         </div>

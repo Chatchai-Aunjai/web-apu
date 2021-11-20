@@ -6,6 +6,7 @@ import SignUp from './authentication/SignUp';
 import SignIn from './screens/AdminSignIn'
 import Customers from './screens/Customer';
 import Appointment from './screens/Appointment';
+import Errorpage from './screens/Errorpage';
 import { Layout } from 'antd';
 import { firebase } from "./Firebase/firebase";
 import {
@@ -21,6 +22,9 @@ const Routers = () => (
         <Route exact path="/admin">
           <NavBar/>
           <Customers/>  
+        </Route>
+        <Route>
+          <Errorpage/>
         </Route>
       </Switch>
     </Router>
