@@ -15,7 +15,7 @@ const Errorpage = () => {
             <img src={error} style={{width: 200, textAlign: 'center'}} alt="error"/>
             <Typography style={{}}>The page you requested could not be found</Typography>
             <Layout style={{paddingTop: 10, background: '#99DFB2'}}>
-            <Link to ={'/main'}><Button type="primary" shape="round" style={{textAlign: 'center', width: 175}}>Go to mainpage</Button></Link>
+            <Link to ={'/admin'}><Button type="primary" shape="round" style={{textAlign: 'center', width: 175}}>Go to mainpage</Button></Link>
             </Layout>
         </Layout>
     )
