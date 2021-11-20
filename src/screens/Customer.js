@@ -9,7 +9,7 @@ import {
 import { ScaleLoader } from 'react-spinners';
 import { ToastContainer, toast } from 'react-toastify';
 import { AddCircle, Edit, Delete } from '@material-ui/icons';
-import { getCustomersAdmin, getCustomer, updateCustomerAdmin, deleteCustomerAdmin } from '../data/customerData';
+import { getCustomersAdmin, getCustomer, deleteCustomerAdmin, addCustomerAppoint } from '../data/customerData';
 import {ConfirmDialog} from './ConfirmDialog';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import Customer from "../models/customer";
@@ -93,16 +93,6 @@ const Customers = () => {
             setCustomers(list);
             setAllReserve(list.length);
             setLoading(false);
-        } catch (error) {
-            toast.error(error.message);
-            setLoading(false);
-        }
-    }
-    const getlistUser = async () => {
-        try {
-            const listUser = await getCustomersUser();
-            setCustomersUser(listUser);
-            setConOpen(true)
         } catch (error) {
             toast.error(error.message);
             setLoading(false);
@@ -199,14 +189,14 @@ const Customers = () => {
                 status
             }
             customersUser.map((custUser) => 
-            updateCustomerUser(custUser.id, customer))
-            await updateCustomerAdmin(custId, customer);
-            toast.success('Customer Updated Successfully');
+            updateCustomerUser(custUser.id, customer));
+            await addCustomerAppoint(customer);
             setOpen(false);
             setSubOpen(false);
-            getlist();
-            sendconfEmail(e, name, email);
             setDoneOpen(true);
+            sendconfEmail(e, name, email);
+            deleteHandler(custId);
+            getlist();
             setName('');
             setBirth('');
             setSsn('');
@@ -217,7 +207,6 @@ const Customers = () => {
             setTime('');
             setDetail('');
             setStatus('');
-
         } catch (error) {
             toast.error(error.message);
         }
@@ -250,12 +239,15 @@ const Customers = () => {
             maxWidth='lg'
             open={props.open}
             aria-labelledby="max-width-dialog-title">
-                <DialogTitle>Update Customer</DialogTitle>
+                <DialogTitle>ข้อมูลผู้จอง (กรุณาทำการยืนยันคิว)</DialogTitle>
                 <ValidatorForm>
                     <DialogContent>
                         <Grid container spacing={2}>
                             <Grid item xs={6}>
                                 <p style={{fontSize:20}}>ชื่อ : <span style={{color:'#3F838C'}}>{props.name}</span></p>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <p style={{fontSize:20}}>วันเกิด : <span style={{color:'#3F838C'}}>{props.bdate}</span></p>
                             </Grid>
                             <Grid item xs={6}>
                                 <p style={{fontSize:20}}>เลขบัตรประชาชน : <span style={{color:'#3F838C'}}>{props.ssn}</span></p>
@@ -281,11 +273,8 @@ const Customers = () => {
                         </Grid>
                     </DialogContent>
                     <DialogActions>
-                        <Button color="red" onClick={() =>  getSubmitUser()}>
+                        <Button color="secondary" onClick={() =>  getSubmitUser()}>
                            Submit
-                        </Button>
-                        <Button type="submit" color="secondary" onClick={() =>  getlistUser()}>
-                           Delete
                         </Button>
                         <Button icon={Close} onClick={props.close} color="primary">
                             Close
@@ -311,7 +300,7 @@ const Customers = () => {
                         Confirm to delete
                     </DialogContent>
                     <DialogActions>
-                        <Button type="submit" color="secondary" onClick={() => customersUser.map((custUser) => (deleteHandler(custId)) && (deleteHandlerUser(custUser.id)))}>
+                        <Button type="submit" color="secondary" onClick={() => deleteHandler(custId) && (customersUser.map((custUser) => deleteHandlerUser(custUser.id)))}>
                            Delete
                         </Button>
                         <Button onClick={props.close} color="primary">
@@ -354,7 +343,7 @@ const Customers = () => {
                 <Grid container>
                     <Grid item xs={8}>
                         <Typography className={classes.title} variant="h6" component="div">
-                            คิวทั้งหมด {allReserve}
+                            รอการตรวจสอบคิวทั้งหมด {allReserve}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -394,7 +383,7 @@ const Customers = () => {
                                         <TableCell>{cust.date}</TableCell>
                                         <TableCell>{cust.time}</TableCell>
                                         <TableCell>{cust.detail}</TableCell>
-                                        <TableCell>{cust.status}</TableCell>
+                                        <TableCell style={{color:'#DC143C'}}>{cust.status}</TableCell>
                                         <TableCell>
                                             <IconButton onClick={() => getOneCustomer(cust.id)} color="primary" aria-label="update customer">
                                                 <Edit />
@@ -436,7 +425,6 @@ const Customers = () => {
                 close={handleClose}
                 formmode={formMode}
                 onSub={ConfirmSubmit}
-                listUser={getlistUser}
             />
             <ConfirmSubmit
                 open={subOpen}

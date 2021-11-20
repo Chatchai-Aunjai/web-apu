@@ -1,6 +1,11 @@
 import React from "react";
-import { AppBar, Toolbar, IconButton, Typography, Menu, MenuItem, makeStyles, Button } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, makeStyles } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Fade from '@mui/material/Fade';
+import MenuSharpIcon from '@mui/icons-material/MenuSharp';
 import { firebase } from "../Firebase/firebase";
 import {
     Link
@@ -13,8 +18,6 @@ const NavBar = (props) => {
     const open = Boolean(anchorEl);
 
     const handleClose = () => {
-        localStorage.removeItem('user');
-        props.setUserState();
         setAnchorEl(null);
     }
     const handleMenu = (event) => {
@@ -22,6 +25,7 @@ const NavBar = (props) => {
     };
     const signOut = () => {
         firebase.auth().signOut();
+        handleClose();
     }
     return (
         <div className={classes.root}>
@@ -32,9 +36,30 @@ const NavBar = (props) => {
                     </Typography>
                     {auth && (
                         <div>
-                            <Button color="inherit" onClick={() => signOut()}><Link to="/">
-                                ออกจากระบบ
-                            </Link></Button> 
+                            <Button
+                                id="fade-button"
+                                aria-controls="fade-menu"
+                                aria-haspopup="true"
+                                aria-expanded={open ? 'true' : undefined}
+                                onClick={handleMenu}
+                                style={{color:'black'}}
+                            >
+                                <MenuSharpIcon/>
+                            </Button>
+                            <Menu
+                                id="fade-menu"
+                                MenuListProps={{
+                                'aria-labelledby': 'fade-button',
+                                }}
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleClose}
+                                TransitionComponent={Fade}
+                            >
+                                <MenuItem onClick={handleClose}><Link to="/admin">รอการตรวจสอบ</Link></MenuItem>
+                                <MenuItem onClick={handleClose}><Link to="/appointment">ตรวจสอบแล้ว</Link></MenuItem>
+                                <MenuItem onClick={() => signOut()}><Link to="/">ออกจากระบบ</Link></MenuItem>
+                            </Menu>
                         </div>
                     )}
                 </Toolbar>
