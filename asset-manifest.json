@@ -1,25 +1,26 @@
 {
   "files": {
-    "main.css": "/web-apu/static/css/main.6ef771e6.chunk.css",
-    "main.js": "/web-apu/static/js/main.7e741287.chunk.js",
-    "main.js.map": "/web-apu/static/js/main.7e741287.chunk.js.map",
-    "runtime-main.js": "/web-apu/static/js/runtime-main.4e1a4be8.js",
-    "runtime-main.js.map": "/web-apu/static/js/runtime-main.4e1a4be8.js.map",
-    "static/css/2.7b891b38.chunk.css": "/web-apu/static/css/2.7b891b38.chunk.css",
-    "static/js/2.77de5021.chunk.js": "/web-apu/static/js/2.77de5021.chunk.js",
-    "static/js/2.77de5021.chunk.js.map": "/web-apu/static/js/2.77de5021.chunk.js.map",
-    "static/js/3.d4e93fa4.chunk.js": "/web-apu/static/js/3.d4e93fa4.chunk.js",
-    "static/js/3.d4e93fa4.chunk.js.map": "/web-apu/static/js/3.d4e93fa4.chunk.js.map",
+    "main.css": "/web-apu/static/css/main.9c5d717c.chunk.css",
+    "main.js": "/web-apu/static/js/main.10c5f6a4.chunk.js",
+    "main.js.map": "/web-apu/static/js/main.10c5f6a4.chunk.js.map",
+    "runtime-main.js": "/web-apu/static/js/runtime-main.d3100866.js",
+    "runtime-main.js.map": "/web-apu/static/js/runtime-main.d3100866.js.map",
+    "static/css/2.f4c56af9.chunk.css": "/web-apu/static/css/2.f4c56af9.chunk.css",
+    "static/js/2.1beebc83.chunk.js": "/web-apu/static/js/2.1beebc83.chunk.js",
+    "static/js/2.1beebc83.chunk.js.map": "/web-apu/static/js/2.1beebc83.chunk.js.map",
+    "static/js/3.441a73e8.chunk.js": "/web-apu/static/js/3.441a73e8.chunk.js",
+    "static/js/3.441a73e8.chunk.js.map": "/web-apu/static/js/3.441a73e8.chunk.js.map",
     "index.html": "/web-apu/index.html",
-    "static/css/2.7b891b38.chunk.css.map": "/web-apu/static/css/2.7b891b38.chunk.css.map",
-    "static/css/main.6ef771e6.chunk.css.map": "/web-apu/static/css/main.6ef771e6.chunk.css.map",
-    "static/js/2.77de5021.chunk.js.LICENSE.txt": "/web-apu/static/js/2.77de5021.chunk.js.LICENSE.txt"
+    "static/css/2.f4c56af9.chunk.css.map": "/web-apu/static/css/2.f4c56af9.chunk.css.map",
+    "static/css/main.9c5d717c.chunk.css.map": "/web-apu/static/css/main.9c5d717c.chunk.css.map",
+    "static/js/2.1beebc83.chunk.js.LICENSE.txt": "/web-apu/static/js/2.1beebc83.chunk.js.LICENSE.txt",
+    "static/media/kkulogo.cb762e90.png": "/web-apu/static/media/kkulogo.cb762e90.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.4e1a4be8.js",
-    "static/css/2.7b891b38.chunk.css",
-    "static/js/2.77de5021.chunk.js",
-    "static/css/main.6ef771e6.chunk.css",
-    "static/js/main.7e741287.chunk.js"
+    "static/js/runtime-main.d3100866.js",
+    "static/css/2.f4c56af9.chunk.css",
+    "static/js/2.1beebc83.chunk.js",
+    "static/css/main.9c5d717c.chunk.css",
+    "static/js/main.10c5f6a4.chunk.js"
   ]
 }
