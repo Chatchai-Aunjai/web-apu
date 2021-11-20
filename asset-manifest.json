@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/web-apu/static/css/main.9c5d717c.chunk.css",
+    "main.css": "/web-apu/static/css/main.ccd5bf23.chunk.css",
     "main.js": "/web-apu/static/js/main.76aaf0a9.chunk.js",
     "main.js.map": "/web-apu/static/js/main.76aaf0a9.chunk.js.map",
     "runtime-main.js": "/web-apu/static/js/runtime-main.9c351133.js",
@@ -12,7 +12,7 @@
     "static/js/3.23623e4c.chunk.js.map": "/web-apu/static/js/3.23623e4c.chunk.js.map",
     "index.html": "/web-apu/index.html",
     "static/css/2.f4c56af9.chunk.css.map": "/web-apu/static/css/2.f4c56af9.chunk.css.map",
-    "static/css/main.9c5d717c.chunk.css.map": "/web-apu/static/css/main.9c5d717c.chunk.css.map",
+    "static/css/main.ccd5bf23.chunk.css.map": "/web-apu/static/css/main.ccd5bf23.chunk.css.map",
     "static/js/2.523e97f8.chunk.js.LICENSE.txt": "/web-apu/static/js/2.523e97f8.chunk.js.LICENSE.txt",
     "static/media/error.9336417a.png": "/web-apu/static/media/error.9336417a.png",
     "static/media/kkulogo.cb762e90.png": "/web-apu/static/media/kkulogo.cb762e90.png"
@@ -21,7 +21,7 @@
     "static/js/runtime-main.9c351133.js",
     "static/css/2.f4c56af9.chunk.css",
     "static/js/2.523e97f8.chunk.js",
-    "static/css/main.9c5d717c.chunk.css",
+    "static/css/main.ccd5bf23.chunk.css",
     "static/js/main.76aaf0a9.chunk.js"
   ]
 }
