@@ -40,8 +40,8 @@ const SignIn = (props) => {
         <div className="loginLogoContainer">
           <img className="loginlogo" src={kkulogo} alt="kkulogo"/>
         </div>
-        <div className="loginTitleContainer" style={{height:100}}>
-          <Title style={{ textAlign: 'center'}}>ระบบบริการหน่วยปฐมภูมิ มหาวิทยาลัยขอนแก่น</Title>
+        <div className="loginTitleContainer">
+          <Title>ระบบบริการหน่วยปฐมภูมิ มหาวิทยาลัยขอนแก่น</Title>
         </div>
         <div 
             style={{

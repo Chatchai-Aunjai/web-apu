@@ -23,10 +23,11 @@
   background: #70C1AA;
   cursor: pointer;
 }
+
 .login {
   width: 100%;
   min-height: 100vh;
-  padding: 0 0px;
+  padding: 0 20px;
   background: #99DFB2;
   display: flex;
 }
@@ -35,11 +36,11 @@
   padding-bottom: 80px;
 }
 .loginContainer {
-  padding: 40px;
+  padding: 60px;
   margin: auto;
   width: 100%;
   max-width: 450px;
-  height: 500px;
+  height: 550px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -47,12 +48,65 @@
   background: white;
   box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.8);
   padding-bottom: 200px;
+  border-radius: 10px;
 }
 .loginLogoContainer {
-  margin-top: 50px;
+  margin-top: 60px;
 }
 .loginlogo {
     width: 100px;
+}
+.login .loginContainer .loginBtnContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.login .loginContainer label {
+  color: black;
+  margin: 14px 0;
+  display: block;
+  font-size: 22px;
+  line-height: 1;
+}
+.login .loginContainer input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 19px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: black;
+  letter-spacing: 1px;
+  border: 1px solid black
+}
+
+.login .loginContainer .btnContainer {
+  width: 100%;
+  padding: 24px 0;
+}
+
+.login .loginContainer .btnContainer p {
+  margin: 14px 0 0 0;
+  text-align: right;
+  color: black;
+}
+
+.login .loginContainer .btnContainer p span {
+  color: #2AB39E;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-left: 5px;
+  cursor: pointer;
+  transition: all 400ms ease-in-out;
+}
+
+.login .loginContainer .btnContainer p span:hover {
+  color: red;
+}
+
+.login .loginContainer .errorMsg {
+  color: red;
+  font-size: 16px;
 }
 .hero {
   width: 100%;
@@ -66,6 +120,19 @@
   -moz-transform: translateX(-50%) translateY(-50%);
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
+}
+h1 {
+  padding: auto;
+  font-size: 30px;
+  text-align: center;
+}
+
+p {
+  font-size: 14px;
+}
+a {
+  text-decoration: none;
+  color: black;
 }
 
 @media (prefers-reduced-motion: no-preference) {
