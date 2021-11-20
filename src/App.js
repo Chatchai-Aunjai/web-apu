@@ -43,12 +43,14 @@ function App() {
   })
   if (isUserSignedIn === true){
     return (
+      <Router>
       <section className="hero">
         <Layout class="mainLayout">
           <ReactNotification/>
           <Routers/>
         </Layout>
       </section>
+      </Router>
     );
   } else {
     return (
