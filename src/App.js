@@ -5,7 +5,7 @@ import Login from './authentication/Login';
 import SignUp from './authentication/SignUp';
 import SignIn from './screens/SignIn'
 import Customers from './screens/Customer';
-import AppointDone from './screens/Appointment';
+import AppointDone from './screens/AppointDone';
 import Errorpage from './screens/Errorpage';
 import ReactNotification from 'react-notifications-component'
 import { Layout } from 'antd';
