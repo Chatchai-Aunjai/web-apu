@@ -135,6 +135,215 @@ a {
   color: black;
 }
 
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .ant-typography  {
+    font-size: 16px !important;
+  }
+  .ant-card img{
+    width: 15% !important;
+    height: 15% !important;
+  }
+  .card-wrapper {
+    justify-content: flex-start !important;;
+    gap: 50% !important;
+    align-items: center !important;
+    flex-direction: column !important;
+    padding-bottom: 10px!important;
+  }
+  .checkq-wrapper{
+    padding-top: 10px;
+  }
+  .welcometxt{
+    padding-top: 5px !important;
+  }
+  .ant-card {
+    height: 100px !important;
+  }
+/*  booked page  */
+  .info {
+    padding: 10px 10px 0px 10px;
+    margin: 0px 0px 20px 0px;
+    height: 460px;
+    border-radius: 10px;
+  }
+  .booked {
+    padding: 10px 10px 0px 10px;
+    margin: 0px 0px 20px 0px;
+    width: 100%;
+    height: 525px;
+    border-radius: 10px;
+  }
+  h1 {
+    padding: 0px;
+    font-size: 20px;
+    text-align: center;
+  } 
+  p {
+    font-size: 12px;
+  }
+  .content {
+    padding: 0 10px;
+    height: 100%;
+  }
+  .date {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  #date {
+    height: 10px;
+  }
+  #time {
+    height: 10px;
+  }
+  .container-fluid .menu {
+    font-size: smaller;
+  }
+}
+
+@media screen and (min-width: 570px) and (max-width: 767px) {
+  .info {
+    height: 520px;
+  }
+  .booked {
+    padding: 10px 10px 0px 10px;
+    margin: 0px 0px 20px 0px;
+    width: 100%;
+    height: 590px;
+  }
+  .container-fluid .menu {
+    font-size: large;
+  }
+  .date {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }  
+  .datepickup {
+    padding: 0 80px;
+  } 
+  #date-picker {
+    width: 80px;
+    margin: 0px 0px 0px 0px;
+  }  
+  h1 {
+    padding: auto;
+    font-size: 30px;
+    text-align: center;
+  } 
+  p {
+    font-size: medium;
+  }
+  .area {
+    font-size: 13px;
+    width: 300px;
+  }
+}
+/*  booked page end*/
+
+@media screen and (min-width: 768px) and (max-width: 1124px) {
+  .ant-typography  {
+    font-size: 20px !important;
+  }
+  .booked {
+    padding: 10px 10px 0px 10px;
+    margin: 0px 0px 20px 0px;
+    width: 100%;
+    height: 525px;
+  }
+  .container-fluid .menu {
+    font-size: large;
+  }
+  .area {
+    font-size: 13px;
+    width: 320px;
+  }
+}
+@media screen and (min-width: 1024px)  {
+  .ant-typography {
+    font-size: 22px !important;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .ant-typography  {
+    font-size: 16px !important;
+  }
+  .ant-card img{
+    width: 15% !important;
+  }
+  .card-wrapper {
+    justify-content: flex-start !important;;
+    gap: 50% !important;
+    align-items: center !important;
+    flex-direction: column !important;
+    padding-bottom: 10px!important;
+  }
+  .checkq-wrapper{
+    padding-top: 10px;
+  }
+  .welcometxt{
+    padding-top: 5px !important;
+  }
+  .ant-card {
+    height: 100px !important;
+  }
+/*  booked page  */
+  .info {
+    padding: 10px 10px 0px 10px;
+    margin: 0px 0px 20px 0px;
+    height: 460px;
+    border-radius: 10px;
+  }
+  .booked {
+    padding: 10px 10px 0px 10px;
+    margin: 0px 0px 20px 0px;
+    width: 100%;
+    height: 525px;
+    border-radius: 10px;
+  }
+  h1 {
+    padding: 0px;
+    font-size: 20px;
+    text-align: center;
+  } 
+  p {
+    font-size: 12px;
+  }
+  .content {
+    padding: 0 10px;
+    height: 100%;
+  }
+  .date {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  #date {
+    height: 10px;
+  }
+  #time {
+    height: 10px;
+  }
+  .container-fluid .menu {
+    font-size: smaller;
+  }
+  .area {
+    font-size: 13px;
+    width: 220px;
+  }
+}
+@media (max-width: 1200px) {
+  h1 {
+    padding: auto;
+    font-size: 25px;
+    text-align: center;
+  } 
+  p {
+    font-size: 13px;
+  }
+}
+/**media queries**/
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
