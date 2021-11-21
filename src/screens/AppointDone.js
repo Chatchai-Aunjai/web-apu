@@ -188,28 +188,28 @@ const AppointDone = () => {
                 <ValidatorForm>
                     <DialogContent>
                         <Grid container spacing={2}>
-                            <Grid item xs={6}>
+                            <Grid item xs={10} sm={10} md={6}>
                                 <p style={{fontSize:20}}>ชื่อ : <span style={{color:'#3F838C'}}>{props.name}</span></p>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={10} sm={10} md={6}>
                                 <p style={{fontSize:20}}>เลขบัตรประชาชน : <span style={{color:'#3F838C'}}>{props.ssn}</span></p>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={10} sm={10} md={6}>
                                 <p style={{fontSize:20}}>เบอร์โทร : <span style={{color:'#3F838C'}}>{props.phone}</span></p>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={10} sm={10} md={6}>
                                 <p style={{fontSize:20}}>อีเมล : <span style={{color:'#3F838C'}}>{props.email}</span></p>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={10} sm={10} md={6}>
                                 <p style={{fontSize:20}}>สถานที่ : <span style={{color:'#3F838C'}}>{props.place}</span></p>
                             </Grid>
-                            <Grid item xs={3}>
+                            <Grid item xs={10} sm={10} md={6}>
                                 <p style={{fontSize:20}}>วันที่จอง : <span style={{color:'#3F838C'}}>{props.date}</span></p>
                             </Grid>
-                            <Grid item xs={3}>
+                            <Grid item xs={10} sm={10} md={6}>
                                 <p style={{fontSize:20}}>เวลาจอง : <span style={{color:'#3F838C'}}>{props.time}</span></p>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item xs={10} sm={10} md={6}>
                                 <p style={{fontSize:20}}>อาการเบื้องต้น : <span style={{color:'#3F838C'}}>{props.detail}</span></p>
                             </Grid>
                         </Grid>
