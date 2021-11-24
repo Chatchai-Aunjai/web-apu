@@ -1,4 +1,5 @@
 import React from "react";
+import "../App.css";
 import { AppBar, Toolbar, IconButton, Typography, makeStyles } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
 import Button from '@mui/material/Button';
@@ -10,6 +11,7 @@ import { firebase } from "../Firebase/firebase";
 import {
     Link
 } from "react-router-dom";
+import { Bolt } from "@mui/icons-material";
 
 const NavBar = (props) => {
     const classes = useStyles();
@@ -31,8 +33,8 @@ const NavBar = (props) => {
         <div className={classes.root}>
             <AppBar position="static" className={classes.menubackgroud}>
                 <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
-                        APU
+                    <Typography variant="h5" className={classes.title} style={{fontWeight:'bold'}}>
+                        PCU Admin
                     </Typography>
                     {auth && (
                         <div>
