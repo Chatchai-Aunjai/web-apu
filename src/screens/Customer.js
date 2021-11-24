@@ -14,6 +14,7 @@ import {ConfirmDialog} from './ConfirmDialog';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import Customer from "../models/customer";
 import {sendconfEmail} from '../sendEmail/sendEmail'
+import {sendFailedEmail} from '../sendEmail/sendFailedEmail'
 import {
     Dialog,
     DialogTitle,
@@ -98,6 +99,16 @@ const Customers = () => {
             setLoading(false);
         }
     }
+    const getlistUser = async () => {
+        try {
+            const listUser = await getCustomersUser();
+            setCustomersUser(listUser);
+            setConOpen(true)
+        } catch (error) {
+            toast.error(error.message);
+            setLoading(false);
+        }
+    }
     const getSubmitUser = async () => {
         try {
             const listUser = await getCustomersUser();
@@ -154,9 +165,10 @@ const Customers = () => {
             toast.error(error.message);
         }
     }
-    const deleteHandler = async (id) => {
+    const deleteHandler = async (e, id) => {
         try {
             await deleteCustomerAdmin(id);
+            sendFailedEmail(e, name, email)
             setConOpen(false);
             getlist();
             toast.success('Customer Deleted Successfully');
@@ -273,8 +285,11 @@ const Customers = () => {
                         </Grid>
                     </DialogContent>
                     <DialogActions>
-                        <Button color="secondary" onClick={() =>  getSubmitUser()}>
+                        <Button color="" style={{fontWeight:'bold'}} onClick={() =>  getSubmitUser()}>
                            Submit
+                        </Button>
+                        <Button color="secondary" onClick={() =>  getlistUser()}>
+                           Cancel
                         </Button>
                         <Button icon={Close} onClick={props.close} color="primary">
                             Close
@@ -300,7 +315,7 @@ const Customers = () => {
                         Confirm to delete
                     </DialogContent>
                     <DialogActions>
-                        <Button type="submit" color="secondary" onClick={() => deleteHandler(custId) && (customersUser.map((custUser) => deleteHandlerUser(custUser.id)))}>
+                        <Button type="submit" color="secondary" onClick={(e) => deleteHandler(e, custId) && (customersUser.map((custUser) => deleteHandlerUser(custUser.id)))}>
                            Delete
                         </Button>
                         <Button onClick={props.close} color="primary">
