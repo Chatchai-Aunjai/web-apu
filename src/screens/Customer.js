@@ -207,7 +207,7 @@ const Customers = () => {
             setSubOpen(false);
             setDoneOpen(true);
             sendconfEmail(e, name, email);
-            deleteHandler(custId);
+            deleteCustomerAdmin(custId);
             getlist();
             setName('');
             setBirth('');
@@ -362,7 +362,7 @@ const Customers = () => {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Table className={classes.table} style={{width:'100%', alignContent:'center'}}>
+                <Table className={classes.table} style={{width:'100%', alignSelf:'center'}}>
                     <TableHead>
                         <TableRow>
                             <TableCell className={classes.head}>Name</TableCell>
