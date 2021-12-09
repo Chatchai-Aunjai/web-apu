@@ -6,6 +6,7 @@ import SignUp from './authentication/SignUp';
 import SignIn from './screens/SignIn'
 import Customers from './screens/Customer';
 import AppointDone from './screens/AppointDone';
+import EditData from './screens/EditDefault';
 import Errorpage from './screens/Errorpage';
 import ReactNotification from 'react-notifications-component'
 import { Layout } from 'antd';
@@ -27,6 +28,10 @@ const Routers = () => (
         <Route exact path="/appointment">
           <NavBar/>
           <AppointDone/>  
+        </Route>
+        <Route exact path="/edit_default">
+          <NavBar/>
+          <EditData/>  
         </Route>
         <Route>
           <Errorpage/>

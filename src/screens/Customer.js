@@ -366,12 +366,9 @@ const Customers = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell className={classes.head}>Name</TableCell>
-                            <TableCell className={classes.head}>SSN</TableCell>
                             <TableCell className={classes.head}>Phone</TableCell>
-                            <TableCell className={classes.head}>Place</TableCell>
                             <TableCell className={classes.head}>Date</TableCell>
                             <TableCell className={classes.head}>Time</TableCell>
-                            <TableCell className={classes.head}>Detail</TableCell>
                             <TableCell className={classes.head}>Status</TableCell>
                             <TableCell className={classes.head}></TableCell>
                         </TableRow>
@@ -392,12 +389,9 @@ const Customers = () => {
                                 {customers.map((cust) => (
                                     <TableRow key={cust.id}>
                                         <TableCell>{cust.name}</TableCell>
-                                        <TableCell>{cust.ssn}</TableCell>
                                         <TableCell>{cust.phone}</TableCell>
-                                        <TableCell>{cust.place}</TableCell>
                                         <TableCell>{cust.date}</TableCell>
                                         <TableCell>{cust.time}</TableCell>
-                                        <TableCell>{cust.detail}</TableCell>
                                         <TableCell style={{color:'#DC143C'}}>{cust.status}</TableCell>
                                         <TableCell>
                                             <IconButton onClick={() => getOneCustomer(cust.id)} color="primary" aria-label="update customer">
@@ -415,15 +409,11 @@ const Customers = () => {
                 close={handleClose}
                 formmode={formMode}
                 name={name}
-                ssn={ssn}
                 phone={phone}
                 email={email}
-                place={place}
                 date={date}
                 time={time}
-                detail={detail}
                 status={status}
-                bdate={bdate}
                 changeName={handleName}
                 changeSsn={handleSsn}
                 changePhone={handlePhone}

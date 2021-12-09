@@ -60,6 +60,7 @@ const NavBar = (props) => {
                             >
                                 <MenuItem onClick={handleClose}><Link to="/admin">รอการตรวจสอบ</Link></MenuItem>
                                 <MenuItem onClick={handleClose}><Link to="/appointment">ตรวจสอบแล้ว</Link></MenuItem>
+                                <MenuItem onClick={handleClose}><Link to="/edit_default">แก้ไขการจอง</Link></MenuItem>
                                 <MenuItem onClick={() => signOut()}><Link to="/">ออกจากระบบ</Link></MenuItem>
                             </Menu>
                         </div>
