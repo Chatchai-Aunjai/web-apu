@@ -7,16 +7,13 @@ import {
     Typography, Button, Grid, IconButton
 } from '@material-ui/core';
 import { ScaleLoader } from 'react-spinners';
-import { ToastContainer, toast } from 'react-toastify';
-import { AddCircle, Edit, Delete } from '@material-ui/icons';
-import { getCustomersAdmin, getAdminMorning, getAdminAfter, getCustomer, deleteCustomerAdmin, addCustomerAppoint } from '../data/customerData';
-import {ConfirmDialog} from './ConfirmDialog';
+import { toast } from 'react-toastify';
+import { Delete } from '@material-ui/icons';
+import { deleteCustomerAppoint, getCustomersAppointAfter, getCustomerApp } from '../data/customerData';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-import Customer from "../models/customer";
-import {sendconfEmail} from '../sendEmail/sendEmail'
-import {sendFailedEmail} from '../sendEmail/sendFailedEmail'
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Customer from "../models/customer";
 import { Link } from "react-router-dom";
 import {
     Dialog,
@@ -27,22 +24,18 @@ import {
   } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 const firestore = firebase.firestore();
-const Customers = () => {
+const AppointDone = () => {
     const classes = useStyles();
-    const [customers, setCustomers] = useState([]);
-    const [customersMorn, setCustomersMorn] = useState([]);
-    const [customersAfter, setCustomersAfter] = useState([]);
+    const [customersApp, setCustomersApp] = useState([]);
     const [customersUser, setCustomersUser] = useState([]);
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false);
     const [conOpen, setConOpen] = useState(false);
-    const [subOpen, setSubOpen] = useState(false);
-    const [doneOpen, setDoneOpen] = useState(false);
     const [formMode, setFormMode] = useState(true);
-    const [allReserveMorn, setAllReserveMorn] = useState('');
-    const [allReserveAfter, setAllReserveAfter] = useState('');
+    const [allReserve, setAllReserve] = useState('');
     const [custId, setCustId] = useState('');
     const [name, setName] = useState('');
+    const [ssn, setSsn] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [place, setPlace] = useState('');
@@ -52,27 +45,26 @@ const Customers = () => {
     const [status, setStatus] = useState('');
     const [bdate, setBirth] = useState('');
     const [alignment, setAlignment] = React.useState("true");
-
-    const handleChange = (event, newAlignment) => {
-        if (newAlignment !== null) {
-            setAlignment(newAlignment);
-        }
-    }
     const override = `
         display: flex;
         align-items: center;
         justify-content: center;    
         border-color: red;
     `;
+    const handleChange = (event, newAlignment) => {
+        if (newAlignment !== null) {
+            setAlignment(newAlignment);
+        }
+    }
     const handleClose = () => {
         setOpen(false);
         setConOpen(false);
-        setSubOpen(false)
     }
-    const handleDoneClose = () => setDoneOpen(false)
-
     const handleName = (event) => {
         setName(event.target.value);
+    }
+    const handleSsn = (event) => {
+        setSsn(event.target.value);
     }
     const handlePhone = (event) => {
         setPhone(event.target.value);
@@ -80,10 +72,16 @@ const Customers = () => {
     const handlePlace = (event) => {
         setEmail(event.target.value);
     }
+    const handleDate = (event) => {
+        setPlace(event.target.value);
+    }
     const handleTime = (event) => {
         setDate(event.target.value);
     }
     const handleEmail = (event) => {
+        setTime(event.target.value);
+    }
+    const handleDetail = (event) => {
         setTime(event.target.value);
     }
     const handleStatus = (event) => {
@@ -93,14 +91,9 @@ const Customers = () => {
     const getlist = async () => {
         try {
             setLoading(true);
-            const list = await getCustomersAdmin();
-            setCustomers(list);
-            const listMorn = await getAdminMorning();
-            setCustomersMorn(listMorn);
-            const listAfter = await getAdminAfter();
-            setCustomersAfter(listAfter);
-            setAllReserveMorn(listMorn.length);
-            setAllReserveAfter(listAfter.length);
+            const listApp = await getCustomersAppointAfter();
+            setCustomersApp(listApp);
+            setAllReserve(listApp.length);
             setLoading(false);
         } catch (error) {
             toast.error(error.message);
@@ -117,16 +110,6 @@ const Customers = () => {
             setLoading(false);
         }
     }
-    const getSubmitUser = async () => {
-        try {
-            const listUser = await getCustomersUser();
-            setCustomersUser(listUser);
-            setSubOpen(true);
-        } catch (error) {
-            toast.error(error.message);
-            setLoading(false);
-        }
-    }
     const getCustomersUser = async () => {
         try {
             const response = await firestore.collection('users/' + email.toString() + '/custo');
@@ -136,10 +119,14 @@ const Customers = () => {
                 const customer = new Customer(
                     doc.id,
                     doc.data().name,
+                    doc.data().bdate,
+                    doc.data().ssn,
                     doc.data().phone,
                     doc.data().email,
+                    doc.data().place,
                     doc.data().date,
                     doc.data().time,
+                    doc.data().detail,
                     doc.data().status
                 );
                 array.push(customer);
@@ -153,22 +140,25 @@ const Customers = () => {
         try {
             setFormMode(false);
             setCustId(id);
-            const response = await getCustomer(id);
+            const response = await getCustomerApp(id);
             setName(response.name);
+            setSsn(response.ssn);
             setPhone(response.phone);
             setEmail(response.email);
+            setPlace(response.place);
             setDate(response.date);
             setTime(response.time);
+            setDetail(response.detail);
             setStatus(response.status);
+            setBirth(response.bdate);
             setOpen(true);
         } catch (error) {
             toast.error(error.message);
         }
     }
-    const deleteHandler = async (e, id) => {
+    const deleteHandler = async (id) => {
         try {
-            await deleteCustomerAdmin(id);
-            sendFailedEmail(e, name, email)
+            await deleteCustomerAppoint(id);
             setConOpen(false);
             getlist();
             toast.success('Customer Deleted Successfully');
@@ -183,46 +173,6 @@ const Customers = () => {
             getlist();
         } catch (error) {
             toast.error(error.message);
-        }
-    }
-    const addCustomerHandler = async (e) => {
-        try {
-            let status = "ตรวจสอบแล้ว";
-            const customer = {
-                name,
-                phone,
-                email,
-                date,
-                time,
-                status
-            }
-            customersUser.map((custUser) => 
-            updateCustomerUser(custUser.id, customer));
-            await addCustomerAppoint(customer);
-            setOpen(false);
-            setSubOpen(false);
-            setDoneOpen(true);
-            sendconfEmail(e, name, email);
-            deleteCustomerAdmin(custId);
-            getlist();
-            setName('');
-            setPhone('');
-            setEmail('');
-            setDate('');
-            setTime('');
-            setStatus('');
-        } catch (error) {
-            toast.error(error.message);
-        }
-    }
-    const updateCustomerUser = async (id, data) => {
-        try {
-            const res = await getCustomer(custId);
-            setEmail(res.email);
-            const customer = await firestore.collection('users/' + email.toString() + '/custo').doc(id);
-            await customer.update(data);
-        } catch (error) {
-            throw error;
         }
     }
     const deleteCustomerUser = async (id) => {
@@ -243,12 +193,15 @@ const Customers = () => {
             maxWidth='lg'
             open={props.open}
             aria-labelledby="max-width-dialog-title">
-                <DialogTitle>ข้อมูลผู้จอง (กรุณาทำการยืนยันคิว)</DialogTitle>
+                <DialogTitle>ข้อมูลผู้จอง</DialogTitle>
                 <ValidatorForm>
                     <DialogContent>
                         <Grid container spacing={2}>
                             <Grid item xs={10} sm={10} md={6}>
                                 <p style={{fontSize:20}}>ชื่อ : <span style={{color:'#3F838C'}}>{props.name}</span></p>
+                            </Grid>
+                            <Grid item xs={10} sm={10} md={6}>
+                                <p style={{fontSize:20}}>เลขบัตรประชาชน : <span style={{color:'#3F838C'}}>{props.ssn}</span></p>
                             </Grid>
                             <Grid item xs={10} sm={10} md={6}>
                                 <p style={{fontSize:20}}>เบอร์โทร : <span style={{color:'#3F838C'}}>{props.phone}</span></p>
@@ -257,19 +210,22 @@ const Customers = () => {
                                 <p style={{fontSize:20}}>อีเมล : <span style={{color:'#3F838C'}}>{props.email}</span></p>
                             </Grid>
                             <Grid item xs={10} sm={10} md={6}>
+                                <p style={{fontSize:20}}>สถานที่ : <span style={{color:'#3F838C'}}>{props.place}</span></p>
+                            </Grid>
+                            <Grid item xs={10} sm={10} md={6}>
                                 <p style={{fontSize:20}}>วันที่จอง : <span style={{color:'#3F838C'}}>{props.date}</span></p>
                             </Grid>
                             <Grid item xs={10} sm={10} md={6}>
                                 <p style={{fontSize:20}}>เวลาจอง : <span style={{color:'#3F838C'}}>{props.time}</span></p>
                             </Grid>
+                            <Grid item xs={10} sm={10} md={6}>
+                                <p style={{fontSize:20}}>อาการเบื้องต้น : <span style={{color:'#3F838C'}}>{props.detail}</span></p>
+                            </Grid>
                         </Grid>
                     </DialogContent>
                     <DialogActions>
-                        <Button color="" style={{fontWeight:'bold'}} onClick={() =>  getSubmitUser()}>
-                           Submit
-                        </Button>
-                        <Button color="secondary" onClick={() =>  getlistUser()}>
-                           Cancel
+                        <Button type="submit" color="secondary" onClick={() =>  getlistUser()}>
+                           Delete
                         </Button>
                         <Button icon={Close} onClick={props.close} color="primary">
                             Close
@@ -295,33 +251,8 @@ const Customers = () => {
                         Confirm to delete
                     </DialogContent>
                     <DialogActions>
-                        <Button type="submit" color="secondary" onClick={(e) => deleteHandler(e, custId) && (customersUser.map((custUser) => deleteHandlerUser(custUser.id)))}>
+                        <Button type="submit" color="secondary" onClick={() =>  deleteHandler(custId) && (customersUser.map((custUser) => deleteHandlerUser(custUser.id)))}>
                            Delete
-                        </Button>
-                        <Button onClick={props.close} color="primary">
-                            Close
-                        </Button>
-                    </DialogActions>
-                </ValidatorForm>
-            </Dialog>
-        );
-      };
-      const ConfirmSubmit = (props) => {
-        return (
-            <Dialog
-            open={props.open}
-            onClose={props.close}
-            aria-labelledby="max-width-dialog-title"
-            >
-                <DialogTitle>Submit</DialogTitle>
-                <ValidatorForm
-                >
-                    <DialogContent>
-                        Confirm to submit
-                    </DialogContent>
-                    <DialogActions>
-                        <Button type="submit" color="secondary" onClick={(e) => addCustomerHandler(e)}>
-                            Submit
                         </Button>
                         <Button onClick={props.close} color="primary">
                             Close
@@ -338,7 +269,7 @@ const Customers = () => {
                 <Grid container>
                     <Grid item xs={8}>
                         <Typography className={classes.title} variant="h6" component="div">
-                            รอการตรวจสอบคิวทั้งหมด {allReserveMorn}
+                            ตรวจสอบคิวเสร็จสิ้นทั้งหมด {allReserve}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -348,10 +279,10 @@ const Customers = () => {
                 exclusive
                 onChange={handleChange}
                 >
-                <ToggleButton value="true">ช่วงเช้า</ToggleButton>
-                <Link to="/admin/afternoon"><ToggleButton value="false">ช่วงบ่าย</ToggleButton></Link>
+                <Link to="/appointment"><ToggleButton value="true">ช่วงเช้า</ToggleButton></Link>
+                <ToggleButton value="false">ช่วงบ่าย</ToggleButton>
                 </ToggleButtonGroup>
-                <Table className={classes.table} style={{width:'100%', alignSelf:'center'}}>
+                <Table className={classes.table} style={{width:'100%', alignContent:'center'}}>
                     <TableHead>
                         <TableRow>
                             <TableCell className={classes.head}>Name</TableCell>
@@ -363,7 +294,7 @@ const Customers = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {customersMorn.length === 0 ? (
+                        {customersApp.length === 0 ? (
                             <TableRow>
                                 <TableCell colSpan={7}>
                                     <ScaleLoader
@@ -375,16 +306,16 @@ const Customers = () => {
                             </TableRow>
                         ) : (
                             <>
-                                {customersMorn.map((cust) => (
+                                {customersApp.map((cust) => (
                                     <TableRow key={cust.id}>
                                         <TableCell>{cust.name}</TableCell>
                                         <TableCell>{cust.phone}</TableCell>
                                         <TableCell>{cust.date}</TableCell>
                                         <TableCell>{cust.time}</TableCell>
-                                        <TableCell style={{color:'#DC143C'}}>{cust.status}</TableCell>
+                                        <TableCell style={{color:'#00008B'}}>{cust.status}</TableCell>
                                         <TableCell>
-                                            <IconButton onClick={() => getOneCustomer(cust.id)} color="primary" aria-label="update customer">
-                                                <Edit />
+                                            <IconButton onClick={() => getOneCustomer(cust.id)} color="secondary" aria-label="delete customer">
+                                                <Delete />
                                             </IconButton>
                                         </TableCell>
                                     </TableRow>
@@ -398,34 +329,30 @@ const Customers = () => {
                 close={handleClose}
                 formmode={formMode}
                 name={name}
+                ssn={ssn}
                 phone={phone}
                 email={email}
+                place={place}
                 date={date}
                 time={time}
+                detail={detail}
                 status={status}
+                bdate={bdate}
                 changeName={handleName}
+                changeSsn={handleSsn}
                 changePhone={handlePhone}
                 changeEmail={handleEmail}
                 changePlace={handlePlace}
+                changeDate={handleDate}
                 changeTime={handleTime}
+                changeDetail={handleDetail}
                 changeStatus={handleStatus}
-                addCustomer={addCustomerHandler}
             />
             <ConfirmDelete
                 open={conOpen}
                 close={handleClose}
                 formmode={formMode}
-                onSub={ConfirmSubmit}
-            />
-            <ConfirmSubmit
-                open={subOpen}
-                close={handleClose}
-                formmode={formMode}
-                addCustomer={addCustomerHandler}
-            />
-             <ConfirmDialog
-                open={doneOpen}
-                close={handleDoneClose}
+                listUser={getlistUser}
             />
             </TableContainer>
             </Grid>
@@ -454,4 +381,4 @@ const useStyles = makeStyles((theme) => ({
         float: 'right',
     },
 }));
-export default Customers;
+export default AppointDone;

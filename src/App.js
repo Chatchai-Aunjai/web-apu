@@ -5,7 +5,9 @@ import Login from './authentication/Login';
 import SignUp from './authentication/SignUp';
 import SignIn from './screens/SignIn'
 import Customers from './screens/Customer';
+import CustomersAfter from './screens/CustomerAfter';
 import AppointDone from './screens/AppointDone';
+import AppointDoneAfter from './screens/AppointDoneAfter';
 import EditData from './screens/EditDefault';
 import Errorpage from './screens/Errorpage';
 import ReactNotification from 'react-notifications-component'
@@ -25,9 +27,17 @@ const Routers = () => (
           <NavBar/>
           <Customers/>  
         </Route>
+        <Route exact path="/admin/afternoon">
+          <NavBar/>
+          <CustomersAfter/>
+        </Route>
         <Route exact path="/appointment">
           <NavBar/>
           <AppointDone/>  
+        </Route>
+        <Route exact path="/appointment/afternoon">
+          <NavBar/>
+          <AppointDoneAfter/>
         </Route>
         <Route exact path="/edit_default">
           <NavBar/>

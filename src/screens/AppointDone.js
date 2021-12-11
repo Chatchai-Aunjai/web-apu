@@ -11,7 +11,10 @@ import { toast } from 'react-toastify';
 import { Delete } from '@material-ui/icons';
 import { deleteCustomerAppoint, getCustomersAppoint, getCustomerApp } from '../data/customerData';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Customer from "../models/customer";
+import { Link } from "react-router-dom";
 import {
     Dialog,
     DialogTitle,
@@ -41,12 +44,18 @@ const AppointDone = () => {
     const [detail, setDetail] = useState('');
     const [status, setStatus] = useState('');
     const [bdate, setBirth] = useState('');
+    const [alignment, setAlignment] = React.useState("true");
     const override = `
         display: flex;
         align-items: center;
         justify-content: center;    
         border-color: red;
     `;
+    const handleChange = (event, newAlignment) => {
+        if (newAlignment !== null) {
+            setAlignment(newAlignment);
+        }
+    }
     const handleClose = () => {
         setOpen(false);
         setConOpen(false);
@@ -264,16 +273,22 @@ const AppointDone = () => {
                         </Typography>
                     </Grid>
                 </Grid>
+                <ToggleButtonGroup
+                color="primary"
+                value={alignment}
+                exclusive
+                onChange={handleChange}
+                >
+                <ToggleButton value="true">ช่วงเช้า</ToggleButton>
+                <Link to="/appointment/afternoon"><ToggleButton value="false">ช่วงบ่าย</ToggleButton></Link>
+                </ToggleButtonGroup>
                 <Table className={classes.table} style={{width:'100%', alignContent:'center'}}>
                     <TableHead>
                         <TableRow>
                             <TableCell className={classes.head}>Name</TableCell>
-                            <TableCell className={classes.head}>SSN</TableCell>
                             <TableCell className={classes.head}>Phone</TableCell>
-                            <TableCell className={classes.head}>Place</TableCell>
                             <TableCell className={classes.head}>Date</TableCell>
                             <TableCell className={classes.head}>Time</TableCell>
-                            <TableCell className={classes.head}>Detail</TableCell>
                             <TableCell className={classes.head}>Status</TableCell>
                             <TableCell className={classes.head}></TableCell>
                         </TableRow>
@@ -294,12 +309,9 @@ const AppointDone = () => {
                                 {customersApp.map((cust) => (
                                     <TableRow key={cust.id}>
                                         <TableCell>{cust.name}</TableCell>
-                                        <TableCell>{cust.ssn}</TableCell>
                                         <TableCell>{cust.phone}</TableCell>
-                                        <TableCell>{cust.place}</TableCell>
                                         <TableCell>{cust.date}</TableCell>
                                         <TableCell>{cust.time}</TableCell>
-                                        <TableCell>{cust.detail}</TableCell>
                                         <TableCell style={{color:'#00008B'}}>{cust.status}</TableCell>
                                         <TableCell>
                                             <IconButton onClick={() => getOneCustomer(cust.id)} color="secondary" aria-label="delete customer">

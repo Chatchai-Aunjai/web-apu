@@ -51,13 +51,13 @@ const Customers = () => {
     const [detail, setDetail] = useState('');
     const [status, setStatus] = useState('');
     const [bdate, setBirth] = useState('');
-    const [alignment, setAlignment] = React.useState("true");
+    const [alignment, setAlignment] = React.useState("false");
 
     const handleChange = (event, newAlignment) => {
         if (newAlignment !== null) {
             setAlignment(newAlignment);
         }
-    }
+    };
     const override = `
         display: flex;
         align-items: center;
@@ -93,13 +93,8 @@ const Customers = () => {
     const getlist = async () => {
         try {
             setLoading(true);
-            const list = await getCustomersAdmin();
-            setCustomers(list);
-            const listMorn = await getAdminMorning();
-            setCustomersMorn(listMorn);
             const listAfter = await getAdminAfter();
             setCustomersAfter(listAfter);
-            setAllReserveMorn(listMorn.length);
             setAllReserveAfter(listAfter.length);
             setLoading(false);
         } catch (error) {
@@ -338,7 +333,7 @@ const Customers = () => {
                 <Grid container>
                     <Grid item xs={8}>
                         <Typography className={classes.title} variant="h6" component="div">
-                            รอการตรวจสอบคิวทั้งหมด {allReserveMorn}
+                            รอการตรวจสอบคิวทั้งหมด {allReserveAfter}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -348,8 +343,9 @@ const Customers = () => {
                 exclusive
                 onChange={handleChange}
                 >
-                <ToggleButton value="true">ช่วงเช้า</ToggleButton>
-                <Link to="/admin/afternoon"><ToggleButton value="false">ช่วงบ่าย</ToggleButton></Link>
+                <Link to="/admin"><ToggleButton value="true">ช่วงเช้า</ToggleButton></Link>
+                <ToggleButton value="false">ช่วงบ่าย</ToggleButton>
+                {console.log(alignment)}
                 </ToggleButtonGroup>
                 <Table className={classes.table} style={{width:'100%', alignSelf:'center'}}>
                     <TableHead>
@@ -363,7 +359,7 @@ const Customers = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {customersMorn.length === 0 ? (
+                        {customersAfter.length === 0 ? (
                             <TableRow>
                                 <TableCell colSpan={7}>
                                     <ScaleLoader
@@ -375,7 +371,7 @@ const Customers = () => {
                             </TableRow>
                         ) : (
                             <>
-                                {customersMorn.map((cust) => (
+                                {customersAfter.map((cust) => (
                                     <TableRow key={cust.id}>
                                         <TableCell>{cust.name}</TableCell>
                                         <TableCell>{cust.phone}</TableCell>
@@ -388,7 +384,7 @@ const Customers = () => {
                                             </IconButton>
                                         </TableCell>
                                     </TableRow>
-                                ))}
+                                    ))}
                             </>
                         )}
                     </TableBody>

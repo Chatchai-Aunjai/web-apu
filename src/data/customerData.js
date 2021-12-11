@@ -30,9 +30,87 @@ export const getCustomersAdmin = async () => {
         throw error
     }
 }
+export const getAdminMorning = async () => {
+    try {
+        const response = await firestore.collection('appoint-morning').orderBy('time');
+        const data = await response.get();
+        let array = [];
+        data.forEach(doc => {
+            const customer = new Customer(
+                doc.id,
+                doc.data().name,
+                doc.data().bdate,
+                doc.data().ssn,
+                doc.data().phone,
+                doc.data().email,
+                doc.data().place,
+                doc.data().date,
+                doc.data().time,
+                doc.data().detail,
+                doc.data().status
+            );
+            array.push(customer);
+        });
+        return array;
+    } catch (error) {
+        throw error
+    }
+}
+export const getAdminAfter = async () => {
+    try {
+        const response = await firestore.collection('appoint-afternoon').orderBy('time');
+        const data = await response.get();
+        let array = [];
+        data.forEach(doc => {
+            const customer = new Customer(
+                doc.id,
+                doc.data().name,
+                doc.data().bdate,
+                doc.data().ssn,
+                doc.data().phone,
+                doc.data().email,
+                doc.data().place,
+                doc.data().date,
+                doc.data().time,
+                doc.data().detail,
+                doc.data().status
+            );
+            array.push(customer);
+        });
+        return array;
+    } catch (error) {
+        throw error
+    }
+}
 export const getCustomersAppoint = async () => {
     try {
-        const response = await firestore.collection('complete-appointment').orderBy('time');
+        const response = await firestore.collection('checkout-morning').orderBy('time');
+        const data = await response.get();
+        let array = [];
+        data.forEach(doc => {
+            const customer = new Customer(
+                doc.id,
+                doc.data().name,
+                doc.data().bdate,
+                doc.data().ssn,
+                doc.data().phone,
+                doc.data().email,
+                doc.data().place,
+                doc.data().date,
+                doc.data().time,
+                doc.data().detail,
+                doc.data().status
+            );
+            array.push(customer);
+        });
+        return array;
+    } catch (error) {
+        throw error
+    }
+}
+export const getCustomersAppointAfter = async () => {
+    try {
+        const response = await firestore.collection('checkout-afternoon').orderBy('time');
         const data = await response.get();
         let array = [];
         data.forEach(doc => {
@@ -109,7 +187,7 @@ export const getCustomer = async (id) => {
 }
 export const getCustomerApp = async (id) => {
     try {
-        const customer = await firestore.collection('complete-appointment').doc(id);
+        const customer = await firestore.collection('checkout-morning').doc(id);
         const data = await customer.get();
         return data.data();
     } catch (error) {
