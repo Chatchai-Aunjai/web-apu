@@ -359,7 +359,7 @@ const History = () => {
                 <Table className={classes.table} style={{width:'100%', alignSelf:'center'}}>
                     <TableHead>
                         <TableRow>
-                            <TableCell className={classes.head}>Choose date</TableCell>
+                            <TableCell className={classes.head} style={{fontSize:'20px', fontWeight:'bolder'}}>Choose date</TableCell>
                             <TableCell className={classes.head}></TableCell>
                         </TableRow>
                     </TableHead>
