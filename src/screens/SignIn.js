@@ -41,7 +41,7 @@ const SignIn = (props) => {
           <img className="loginlogo" src={kkulogo} alt="kkulogo"/>
         </div>
         <div className="loginTitleContainer">
-          <Title>ระบบบริการหน่วยปฐมภูมิ มหาวิทยาลัยขอนแก่น</Title>
+          <Title>สำนักหอสมุด <br></br> มหาวิทยาลัยขอนแก่น</Title>
         </div>
         <div 
             style={{
@@ -53,8 +53,8 @@ const SignIn = (props) => {
         <button
           type="primary"
           style={{
-            background: "green",
-            color: "white",
+            background: "#a73b23", 
+            color:'#FFFAFA',
             border: "none",
             width: "95%",
             borderRadius: "20px",
