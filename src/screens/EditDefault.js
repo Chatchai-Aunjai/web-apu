@@ -98,12 +98,12 @@ const EditDefault = () => {
           "weekends": weekends,
           "businessHours": [
             {
-              daysOfWeek: [1, 2, 3, 4, 5, 6, 7],
+              daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
               startTime: morningStartTime,
               endTime: morningEndTime,
             },
             {
-              daysOfWeek: [1, 2, 3, 4, 5, 6, 7],
+              daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
               startTime: eveningStartTime,
               endTime: eveningEndTime,
             },
