@@ -11,11 +11,11 @@ import '../App.css'
 
 const Errorpage = () => {
     return(
-        <Layout id="error-layout"style={{textAlign: 'center', background: '#99DFB2', alignItems: 'center'}}>
+        <Layout id="error-layout"style={{width: 500, height: 300, textAlign: 'center', background: '#f6f6f6', alignItems: 'center', boxShadow: '2px 17px 22px -6px rgba(0,0,0,0.75)', borderRadius:'10px'}}>
             <img src={error} style={{width: 200, textAlign: 'center'}} alt="error"/>
             <Typography style={{}}>The page you requested could not be found</Typography>
-            <Layout style={{paddingTop: 10, background: '#99DFB2'}}>
-            <Link to ={'/admin'}><Button type="primary" shape="round" style={{textAlign: 'center', width: 175}}>Go to mainpage</Button></Link>
+            <Layout style={{paddingTop: 10, background: '#f6f6f6'}}>
+            <Link to ={'/admin'}><Button type="primary" shape="round" style={{textAlign: 'center', width: 175 ,background: "#a73b23", color:'#FFFAFA'}}>Go to mainpage</Button></Link>
             </Layout>
         </Layout>
     )
