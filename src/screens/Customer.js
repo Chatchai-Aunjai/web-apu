@@ -89,7 +89,9 @@ const Customers = () => {
     const handleStatus = (event) => {
         setStatus(event.target.value);
     }
-    
+    const refreshPage = () => {
+        window.location.reload(false);
+    }
     const getlist = async () => {
         try {
             setLoading(true);
@@ -348,7 +350,7 @@ const Customers = () => {
                 exclusive
                 onChange={handleChange}
                 >
-                <ToggleButton value="true">ช่วงเช้า</ToggleButton>
+                <ToggleButton value="true" onClick={() => refreshPage()}>ช่วงเช้า</ToggleButton>
                 <Link to="/admin/afternoon"><ToggleButton value="false">ช่วงบ่าย</ToggleButton></Link>
                 </ToggleButtonGroup>
                 <Table className={classes.table} style={{width:'100%', alignSelf:'center'}}>
