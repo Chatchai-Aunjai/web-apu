@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/web-apu/static/css/main.d47578fe.chunk.css",
-    "main.js": "/web-apu/static/js/main.d944bc7f.chunk.js",
-    "main.js.map": "/web-apu/static/js/main.d944bc7f.chunk.js.map",
-    "runtime-main.js": "/web-apu/static/js/runtime-main.f59b582d.js",
-    "runtime-main.js.map": "/web-apu/static/js/runtime-main.f59b582d.js.map",
-    "static/css/2.f4c56af9.chunk.css": "/web-apu/static/css/2.f4c56af9.chunk.css",
-    "static/js/2.031da28d.chunk.js": "/web-apu/static/js/2.031da28d.chunk.js",
-    "static/js/2.031da28d.chunk.js.map": "/web-apu/static/js/2.031da28d.chunk.js.map",
-    "static/js/3.816b6207.chunk.js": "/web-apu/static/js/3.816b6207.chunk.js",
-    "static/js/3.816b6207.chunk.js.map": "/web-apu/static/js/3.816b6207.chunk.js.map",
+    "main.css": "/web-apu/static/css/main.b2d50d53.chunk.css",
+    "main.js": "/web-apu/static/js/main.2009e306.chunk.js",
+    "main.js.map": "/web-apu/static/js/main.2009e306.chunk.js.map",
+    "runtime-main.js": "/web-apu/static/js/runtime-main.90a7ab23.js",
+    "runtime-main.js.map": "/web-apu/static/js/runtime-main.90a7ab23.js.map",
+    "static/css/2.12b6ecaf.chunk.css": "/web-apu/static/css/2.12b6ecaf.chunk.css",
+    "static/js/2.132521a5.chunk.js": "/web-apu/static/js/2.132521a5.chunk.js",
+    "static/js/2.132521a5.chunk.js.map": "/web-apu/static/js/2.132521a5.chunk.js.map",
+    "static/js/3.cabadccc.chunk.js": "/web-apu/static/js/3.cabadccc.chunk.js",
+    "static/js/3.cabadccc.chunk.js.map": "/web-apu/static/js/3.cabadccc.chunk.js.map",
     "index.html": "/web-apu/index.html",
-    "static/css/2.f4c56af9.chunk.css.map": "/web-apu/static/css/2.f4c56af9.chunk.css.map",
-    "static/css/main.d47578fe.chunk.css.map": "/web-apu/static/css/main.d47578fe.chunk.css.map",
-    "static/js/2.031da28d.chunk.js.LICENSE.txt": "/web-apu/static/js/2.031da28d.chunk.js.LICENSE.txt",
+    "static/css/2.12b6ecaf.chunk.css.map": "/web-apu/static/css/2.12b6ecaf.chunk.css.map",
+    "static/css/main.b2d50d53.chunk.css.map": "/web-apu/static/css/main.b2d50d53.chunk.css.map",
+    "static/js/2.132521a5.chunk.js.LICENSE.txt": "/web-apu/static/js/2.132521a5.chunk.js.LICENSE.txt",
     "static/media/error.9336417a.png": "/web-apu/static/media/error.9336417a.png",
     "static/media/kkulogo.cb762e90.png": "/web-apu/static/media/kkulogo.cb762e90.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.f59b582d.js",
-    "static/css/2.f4c56af9.chunk.css",
-    "static/js/2.031da28d.chunk.js",
-    "static/css/main.d47578fe.chunk.css",
-    "static/js/main.d944bc7f.chunk.js"
+    "static/js/runtime-main.90a7ab23.js",
+    "static/css/2.12b6ecaf.chunk.css",
+    "static/js/2.132521a5.chunk.js",
+    "static/css/main.b2d50d53.chunk.css",
+    "static/js/main.2009e306.chunk.js"
   ]
 }
