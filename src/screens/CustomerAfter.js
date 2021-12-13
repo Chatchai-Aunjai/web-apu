@@ -9,7 +9,7 @@ import {
 import { ScaleLoader } from 'react-spinners';
 import { ToastContainer, toast } from 'react-toastify';
 import { AddCircle, Edit, Delete } from '@material-ui/icons';
-import { getCustomersAdmin, getAdminMorning, getAdminAfter, getCustomer, deleteCustomerAdmin, addCustomerAppoint } from '../data/customerData';
+import { getAdminMorning, deleteCustomerMorn, deleteCustomerAfter, getAdminAfter, getCustomer, deleteCustomerAdmin, addCustomerAppoint } from '../data/customerData';
 import {ConfirmDialog} from './ConfirmDialog';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import Customer from "../models/customer";
@@ -95,6 +95,9 @@ const Customers = () => {
     const getlist = async () => {
         try {
             setLoading(true);
+            const listMorn = await getAdminMorning();
+            setCustomersMorn(listMorn);
+            setAllReserveMorn(listMorn.length);
             const listAfter = await getAdminAfter();
             setCustomersAfter(listAfter);
             setAllReserveAfter(listAfter.length);
@@ -229,6 +232,31 @@ const Customers = () => {
             throw error;
         }
     }
+    const deleteHistory = async () => {
+        try {
+            customersMorn.map((cust) => {
+                deleteCustomerMorn(cust.id);
+            });
+            customersAfter.map((cust) => {
+                deleteCustomerAfter(cust.id);
+            });
+            const response = await firestore.collection('users');
+            const data = await response.get();
+            data.forEach( async (doc) => {
+                const res = await firestore.collection('users/' + doc.id.toString() + '/custo');
+                const dat = await res.get();
+                dat.forEach( async (docu) => {
+                    await firestore.collection('users/' + doc.id.toString() + '/custo').doc(docu.id).delete();
+                });
+                await firestore.collection('users').doc(doc.id.toString()).delete();
+            });
+        } catch (error) {
+            throw error
+        }
+    }
+    const confirmDelete = () => {
+        setConOpen(true);
+    }
     useEffect(() => {
         getlist();
     }, []);
@@ -289,10 +317,10 @@ const Customers = () => {
                     onSubmit={props.close}
                 >
                     <DialogContent>
-                        Confirm to delete
+                        ยืนยันเพื่อทำการลบข้อมูลทั้งหมด
                     </DialogContent>
                     <DialogActions>
-                        <Button type="submit" color="secondary" onClick={(e) => deleteHandler(e, custId) && (customersUser.map((custUser) => deleteHandlerUser(custUser.id)))}>
+                        <Button type="submit" color="secondary" onClick={(e) => deleteHistory()}>
                            Delete
                         </Button>
                         <Button onClick={props.close} color="primary">
@@ -335,7 +363,7 @@ const Customers = () => {
                 <Grid container>
                     <Grid item xs={8}>
                         <Typography className={classes.title} variant="h6" component="div">
-                            รอการตรวจสอบคิวทั้งหมด {allReserveAfter}
+                            คิวทั้งหมด {allReserveAfter}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -349,6 +377,9 @@ const Customers = () => {
                 <ToggleButton value="false" onClick={() => refreshPage()}>ช่วงบ่าย</ToggleButton>
                 {console.log(alignment)}
                 </ToggleButtonGroup>
+                <IconButton onClick={() => confirmDelete()} color="secondary" aria-label="update customer" style={{float:'right', marginRight:'50px'}}>
+                    <Delete />
+                </IconButton>
                 <Table className={classes.table} style={{width:'100%', alignSelf:'center'}}>
                     <TableHead>
                         <TableRow>
@@ -381,9 +412,6 @@ const Customers = () => {
                                         <TableCell>{cust.time}</TableCell>
                                         <TableCell style={{color:'#DC143C'}}>{cust.status}</TableCell>
                                         <TableCell>
-                                            <IconButton onClick={() => getOneCustomer(cust.id)} color="primary" aria-label="update customer">
-                                                <Edit />
-                                            </IconButton>
                                         </TableCell>
                                     </TableRow>
                                     ))}

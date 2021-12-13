@@ -27,16 +27,6 @@ import { getCustomersAdmin, getAdminMorning, getAdminAfter, getCustomer, deleteC
 
 const firestore = firebase.firestore();
 
-function createData(name, calories, fat, carbs, protein) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-  };
-}
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -346,6 +336,30 @@ const override = `
                   const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
                   return (
+                    customersMorn.length === 0 ? (
+                    <TableRow
+                      hover
+                      onClick={(event) => handleClick(event, row.name)}
+                      role="checkbox"
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={row.name}
+                      selected={isItemSelected}
+                    >
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                      >
+                          <ScaleLoader
+                            css={override}
+                            size={150}
+                            color={"#eb4034"}
+                            loading={loading} />
+                        </TableCell>
+                        </TableRow>
+                    ) : (
                     <>
                     <TableRow
                       hover
@@ -379,6 +393,7 @@ const override = `
                       <TableCell align="right" style={{textAlign:'left'}}>{row.status}</TableCell>
                     </TableRow>
                     </>
+                  )
                   );
                 })}
               {emptyRows > 0 && (
@@ -387,9 +402,8 @@ const override = `
                     height: (dense ? 33 : 53) * emptyRows,
                   }}
                 >
-                  <TableCell colSpan={6} />
-                  <TableCell colSpan={7}>
-                    <ScaleLoader
+                  <TableCell colSpan={6}>
+                  <ScaleLoader
                         css={override}
                         size={150}
                         color={"#eb4034"}

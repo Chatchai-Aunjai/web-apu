@@ -110,7 +110,8 @@ const History = () => {
             const listAfter = await getAdminAfter();
             setCustomersAfter(listAfter);
             setAllReserveMorn(listMorn.length);
-            setAllReserveAfter(listAfter.length);
+            const allList = listMorn.length - 2; 
+            setAllReserveAfter(allList);
             setLoading(false);
         } catch (error) {
             toast.error(error.message);
@@ -139,10 +140,10 @@ const History = () => {
     }
     const getCustomersUser = async () => {
         try {
-            const response = await firestore.collection('history');
+            const response = await firestore.collection('history').orderBy('date', 'desc');
             const data = await response.get();
             let array = [];
-            data.forEach(doc => {
+            data.forEach( async (doc) => {
                 const customer = new Customer(
                     doc.id,
                     doc.data().name,
