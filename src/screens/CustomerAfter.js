@@ -250,9 +250,25 @@ const Customers = () => {
                 });
                 await firestore.collection('users').doc(doc.id.toString()).delete();
             });
+            getLoading()
         } catch (error) {
             throw error
         }
+    }
+    const getLoading = async () => {
+        setSubOpen(true)
+        setLoading(true)
+        const response = await firestore.collection('users');
+        const data = await response.get();
+        let array = [];
+        data.forEach( async (doc) => {
+            array.push(doc.id);
+        })
+        if (array.length == 0) {
+            setLoading (false)
+            setSubOpen(false)
+        }
+        getlist();
     }
     const confirmDelete = () => {
         setConOpen(true);
@@ -335,21 +351,24 @@ const Customers = () => {
         return (
             <Dialog
             open={props.open}
-            onClose={props.close}
             aria-labelledby="max-width-dialog-title"
             >
-                <DialogTitle>Submit</DialogTitle>
+                <DialogTitle></DialogTitle>
                 <ValidatorForm
                 >
                     <DialogContent>
-                        Confirm to submit
+                        <ScaleLoader
+                            css={override}
+                            size={150}
+                            color={"#eb4034"}
+                            loading={loading} />
                     </DialogContent>
                     <DialogActions>
-                        <Button type="submit" color="secondary" onClick={(e) => addCustomerHandler(e)}>
-                            Submit
+                        <Button type="submit" color="secondary" >
+       
                         </Button>
-                        <Button onClick={props.close} color="primary">
-                            Close
+                        <Button color="primary">
+           
                         </Button>
                     </DialogActions>
                 </ValidatorForm>
