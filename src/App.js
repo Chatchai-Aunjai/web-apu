@@ -1,5 +1,5 @@
 import './App.css';
-import NavBar from './layouts/NavBar';
+import NavBar from './layouts/header';
 import React, { useState, useEffect } from 'react';
 import Login from './authentication/Login';
 import SignUp from './authentication/SignUp';

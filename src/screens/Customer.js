@@ -17,6 +17,8 @@ import {sendconfEmail} from '../sendEmail/sendEmail'
 import {sendFailedEmail} from '../sendEmail/sendFailedEmail'
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { Link } from "react-router-dom";
 import {
     Dialog,
@@ -40,6 +42,7 @@ const Customers = () => {
     const [doneOpen, setDoneOpen] = useState(false);
     const [formMode, setFormMode] = useState(true);
     const [allReserveMorn, setAllReserveMorn] = useState('');
+    const [allReserveAfter, setAllReserveAfter] = useState('');
     const [custId, setCustId] = useState('');
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
@@ -51,6 +54,7 @@ const Customers = () => {
     const [status, setStatus] = useState('');
     const [bdate, setBirth] = useState('');
     const [alignment, setAlignment] = React.useState("true");
+    const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newAlignment) => {
         if (newAlignment !== null) {
@@ -93,14 +97,29 @@ const Customers = () => {
     }
     const getlist = async () => {
         try {
+            setCustomersMorn([]);
             setLoading(true);
             const list = await getCustomersAdmin();
             setCustomers(list);
             const listMorn = await getAdminMorning();
             setCustomersMorn(listMorn);
-            setAllReserveMorn(listMorn.length);
             const listAfter = await getAdminAfter();
             setCustomersAfter(listAfter);
+            setAllReserveMorn(listMorn.length);
+            setLoading(false);
+        } catch (error) {
+            toast.error(error.message);
+            setLoading(false);
+        }
+    }
+    const setCustomerAfter = async () => {
+        try {
+            setCustomersMorn([]);
+            setLoading(true);
+            const listAfter = await getAdminAfter();
+            setCustomersMorn(listAfter);
+            setCustomersAfter(listAfter);
+            setAllReserveMorn(listAfter.length);
             setLoading(false);
         } catch (error) {
             toast.error(error.message);
@@ -149,22 +168,6 @@ const Customers = () => {
             throw error
         }
     }
-    const getOneCustomer = async (id) => {
-        try {
-            setFormMode(false);
-            setCustId(id);
-            const response = await getCustomer(id);
-            setName(response.name);
-            setPhone(response.phone);
-            setEmail(response.email);
-            setDate(response.date);
-            setTime(response.time);
-            setStatus(response.status);
-            setOpen(true);
-        } catch (error) {
-            toast.error(error.message);
-        }
-    }
     const addCustomerHandler = async (e) => {
         try {
             let status = "ตรวจสอบแล้ว";
@@ -205,13 +208,6 @@ const Customers = () => {
             throw error;
         }
     }
-    const deleteCustomerUser = async (id) => {
-        try {
-            await firestore.collection('users/' + email.toString() + '/custo').doc(id).delete();
-        } catch (error) {
-            throw error;
-        }
-    }
     const deleteHistory = async () => {
         try {
             customersMorn.map((cust) => {
@@ -236,8 +232,6 @@ const Customers = () => {
         }
     }
     const getLoading = async () => {
-        setSubOpen(true)
-        setLoading(true)
         const response = await firestore.collection('users');
         const data = await response.get();
         let array = [];
@@ -245,7 +239,6 @@ const Customers = () => {
             array.push(doc.id);
         })
         if (array.length == 0) {
-            setLoading (false)
             setSubOpen(false)
         }
         getlist();
@@ -255,6 +248,7 @@ const Customers = () => {
     }
     useEffect(() => {
         getlist();
+        setCustomersAfter();
     }, []);
 
     const CustomerDialog = (props) => {
@@ -308,7 +302,7 @@ const Customers = () => {
             onClose={props.close}
             aria-labelledby="max-width-dialog-title"
             >
-                <DialogTitle>Delete</DialogTitle>
+                <DialogTitle>ลบข้อมูล</DialogTitle>
                 <ValidatorForm
                     onSubmit={props.close}
                 >
@@ -316,11 +310,11 @@ const Customers = () => {
                         ยืนยันเพื่อทำการลบข้อมูลทั้งหมด
                     </DialogContent>
                     <DialogActions>
-                        <Button type="submit" color="secondary" onClick={(e) => deleteHistory()}>
-                           Delete
-                        </Button>
                         <Button onClick={props.close} color="primary">
-                            Close
+                            ไม่
+                        </Button>
+                        <Button type="submit" color="secondary" onClick={(e) => deleteHistory()}>
+                           ใช่
                         </Button>
                     </DialogActions>
                 </ValidatorForm>
@@ -360,24 +354,26 @@ const Customers = () => {
             <Grid style={{width:'100%', display:'block', pading:'20px'}}>
             <TableContainer component={Paper} style={{width:'100%', display:'block', alignContent:'center'}}>
                 <Grid container>
-                    <Grid item xs={8}>
-                        <Typography className={classes.title} variant="h6" component="div">
+                    <Grid item xs={12}>
+                        <Typography className={classes.title} variant="h6" component="div" style={{fontWeight:'bold'}}>
                             คิวทั้งหมด {allReserveMorn}
+                            <IconButton onClick={() => confirmDelete()} color="secondary" aria-label="update customer" style={{float:'right'}}>
+                                <Delete />
+                            </IconButton>
                         </Typography>
                     </Grid>
                 </Grid>
-                <ToggleButtonGroup
-                color="primary"
-                value={alignment}
-                exclusive
-                onChange={handleChange}
+                <BottomNavigation
+                    showLabels
+                    value={value}
+                    style={{backgroundColor:'#DCDCDC'}}
+                    onChange={(event, newValue) => {
+                        setValue(newValue);
+                    }}
                 >
-                <ToggleButton value="true" onClick={() => refreshPage()}>ช่วงเช้า</ToggleButton>
-                <Link to="/admin/afternoon"><ToggleButton value="false">ช่วงบ่าย</ToggleButton></Link>
-                </ToggleButtonGroup>
-                <IconButton onClick={() => confirmDelete()} color="secondary" aria-label="update customer" style={{float:'right', marginRight:'50px'}}>
-                    <Delete />
-                </IconButton>
+                <BottomNavigationAction label="ช่วงเช้า" onClick={() => getlist()}/>
+                <BottomNavigationAction label="ช่วงบ่าย" onClick={() => setCustomerAfter()}/>
+                </BottomNavigation>
                 <Table className={classes.table} style={{width:'100%', alignSelf:'center'}}>
                     <TableHead>
                         <TableRow>

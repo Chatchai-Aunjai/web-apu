@@ -62,31 +62,31 @@ const headCells = [
     id: 'Name',
     numeric: false,
     disablePadding: true,
-    label: 'Name',
+    label: 'ชื่อ',
   },
   {
     id: 'Phone',
     numeric: true,
     disablePadding: false,
-    label: 'Phone',
+    label: 'เบอร์โทรศัพท์',
   },
   {
     id: 'Date',
     numeric: true,
     disablePadding: false,
-    label: 'Date',
+    label: 'วัน',
   },
   {
     id: 'Time',
     numeric: true,
     disablePadding: false,
-    label: 'Time',
+    label: 'เวลาที่เช็คอิน',
   },
   {
     id: 'Status',
     numeric: true,
     disablePadding: false,
-    label: 'Status',
+    label: 'สถานะ',
   },
 ];
 
@@ -166,7 +166,7 @@ const EnhancedTableToolbar = (props) => {
           component="div"
           style={{fontWeight:'bolder'}}
         >
-          Date
+          วันที่ {sessionStorage.histoDate.toString()}
         </Typography>
       )}
 

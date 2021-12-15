@@ -14,7 +14,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
-import Button from "@mui/material/Button";
+import Button from '@material-ui/core/Button';
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import "react-notifications-component/dist/theme.css";
@@ -203,7 +203,7 @@ const EditDefault = () => {
                   step: 300, // 5 min
                 }}
                 sx={{ width: 150 }}
-                style={{ marginRight: "10px" }}
+                style={{ marginRight: "10px", marginBottom:'20px' }}
                 onChange={setMornStart}
               />
               <TextField
@@ -237,7 +237,7 @@ const EditDefault = () => {
                   step: 300, // 5 min
                 }}
                 sx={{ width: 150 }}
-                style={{ marginRight: "10px" }}
+                style={{ marginRight: "10px", marginBottom:'20px'}}
                 onChange={setEveningStart}
               />
               <TextField
@@ -273,6 +273,7 @@ const EditDefault = () => {
               aria-label="gender"
               name="row-radio-buttons-group"
               defaultValue="open"
+              style={{ marginLeft: "30px" }}
             >
               <FormControlLabel
                 value="open"
@@ -294,6 +295,7 @@ const EditDefault = () => {
               aria-label="gender"
               name="row-radio-buttons-group"
               defaultValue="open"
+              style={{ marginLeft: "30px" }}
             >
               <FormControlLabel
                 value="open"
@@ -310,9 +312,10 @@ const EditDefault = () => {
             </RadioGroup>
             <br />
             <br />
-            <div style={{ padding: "10px" }}>
+            <div style={{ padding: "10px" , paddingBottom:'20px'}}>
               <Button
                 variant="contained"
+                style={{backgroundColor:'#0ca9dd', color:'white'}}
                 onClick={() => {
                   confirmAlert({
                     childrenElement: () => <div></div>, // Custom UI or Component
@@ -331,10 +334,10 @@ const EditDefault = () => {
                       return (
                         <div
                           className="custom-ui"
-                          style={{ backgroundColor: "white" }}
+                          style={{ backgroundColor: "white", width:'200px', textAlign:'center' }}
                         >
                           <h1>ยืนยัน</h1>
-                          <p>แก้ไขการตั้งค่าหรือไม่</p>
+                          <p style={{ height:'50px', paddingTop:'10px'}}>แก้ไขการตั้งค่าหรือไม่</p>
                           <div
                             className="alert-btn-container"
                             style={{
@@ -344,26 +347,24 @@ const EditDefault = () => {
                               float: "right",
                             }}
                           >
-                            <div className="cancel-btn-ctn">
-                              <button
-                                className="alert-cancel-btn"
-                                style={{ cursor: "pointer" }}
-                                onClick={onClose}
-                              >
-                                ยกเลิก
-                              </button>
-                            </div>
-
-                            <button
-                              className="alert-conf-btn"
+                            <Button
+                              
                               onClick={() => {
                                 ConfirmClick();
                                 onClose();
                               }}
-                              style={{ cursor: "pointer" }}
+                              style={{ cursor: "pointer",marginRight:'10px', backgroundColor:'#0ca9dd', color:'white' }}
                             >
                               ยืนยัน
-                            </button>
+                            </Button>
+                            <div>
+                              <Button
+                                style={{ cursor: "pointer", backgroundColor:'#DCDCDC' }}
+                                onClick={onClose}
+                              >
+                                ยกเลิก
+                              </Button>
+                            </div>
                           </div>
                         </div>
                       );

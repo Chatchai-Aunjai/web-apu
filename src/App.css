@@ -113,6 +113,16 @@
   min-height: 100vh;
   background: #f6f6f6;
 }
+.header .menu {
+  float: left;
+  background: #0ca9dd;
+  color: #f6fcff;
+}
+
+.mainLayout header {
+  background: #0ca9dd;
+  color: #f6fcff;
+}
 #error-layout{
   position: absolute;
   top: 50%;
