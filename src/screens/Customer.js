@@ -354,11 +354,11 @@ const Customers = () => {
                 <Table className={classes.table} style={{width:'100%', alignSelf:'center'}}>
                     <TableHead>
                         <TableRow>
-                            <TableCell className={classes.head}>Name</TableCell>
-                            <TableCell className={classes.head}>Phone</TableCell>
-                            <TableCell className={classes.head}>Date</TableCell>
-                            <TableCell className={classes.head}>Time</TableCell>
-                            <TableCell className={classes.head}>Status</TableCell>
+                            <TableCell className={classes.head}>ชื่อ - นามสกุล</TableCell>
+                            <TableCell className={classes.head}>เบอร์โทรศัพท์</TableCell>
+                            <TableCell className={classes.head}>วันที่</TableCell>
+                            <TableCell className={classes.head}>เวลา</TableCell>
+                            <TableCell className={classes.head}>สถานะ</TableCell>
                             <TableCell className={classes.head}></TableCell>
                         </TableRow>
                     </TableHead>

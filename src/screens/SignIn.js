@@ -53,8 +53,8 @@ const SignIn = (props) => {
         <button
           type="primary"
           style={{
-            background: "#a73b23", 
-            color:'#FFFAFA',
+            color: 'white', 
+            background: "#0ca9dd",
             border: "none",
             width: "95%",
             borderRadius: "20px",

@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
         
     },
     menubackgroud: {
-        background: 'linear-gradient(45deg, #a73b23 30%, #752819 90%)',
+        background: "#0ca9dd",
         
     },
     title: {
