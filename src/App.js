@@ -5,6 +5,8 @@ import Login from './authentication/Login';
 import SignUp from './authentication/SignUp';
 import SignIn from './screens/SignIn'
 import Customers from './screens/Customer';
+import History from './screens/History';
+import HistoryDate from './screens/HistoryDate';
 import CustomersAfter from './screens/CustomerAfter';
 import AppointDone from './screens/AppointDone';
 import AppointDoneAfter from './screens/AppointDoneAfter';
@@ -42,6 +44,14 @@ const Routers = () => (
         <Route exact path="/edit_default">
           <NavBar/>
           <EditData/>  
+        </Route>
+        <Route exact path="/history">
+          <NavBar/>
+          <History/>  
+        </Route>
+        <Route exact path="/history/date">
+          <NavBar/>
+          <HistoryDate/>  
         </Route>
         <Route>
           <Errorpage/>

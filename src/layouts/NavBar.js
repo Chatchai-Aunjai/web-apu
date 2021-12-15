@@ -34,7 +34,7 @@ const NavBar = (props) => {
             <AppBar position="static" className={classes.menubackgroud}>
                 <Toolbar>
                     <Typography variant="h5" className={classes.title} style={{fontWeight:'bold'}}>
-                        PCU Admin
+                        KKUL Admin
                     </Typography>
                     {auth && (
                         <div>
@@ -44,7 +44,7 @@ const NavBar = (props) => {
                                 aria-haspopup="true"
                                 aria-expanded={open ? 'true' : undefined}
                                 onClick={handleMenu}
-                                style={{color:'black'}}
+                                style={{color:'white'}}
                             >
                                 <MenuSharpIcon/>
                             </Button>
@@ -59,7 +59,7 @@ const NavBar = (props) => {
                                 TransitionComponent={Fade}
                             >
                                 <MenuItem onClick={handleClose}><Link to="/admin">รอการตรวจสอบ</Link></MenuItem>
-                                <MenuItem onClick={handleClose}><Link to="/appointment">ตรวจสอบแล้ว</Link></MenuItem>
+                                <MenuItem onClick={handleClose}><Link to="/history">ประวัติการจอง</Link></MenuItem>
                                 <MenuItem onClick={handleClose}><Link to="/edit_default">แก้ไขการจอง</Link></MenuItem>
                                 <MenuItem onClick={() => signOut()}><Link to="/">ออกจากระบบ</Link></MenuItem>
                             </Menu>

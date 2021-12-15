@@ -225,6 +225,20 @@ export const deleteCustomerUser = async (id) => {
         throw error;
     }
 }
+export const deleteCustomerMorn = async (id) => {
+    try {
+        await firestore.collection('appoint-morning').doc(id).delete();
+    } catch (error) {
+        throw error;
+    }
+}
+export const deleteCustomerAfter = async (id) => {
+    try {
+        await firestore.collection('appoint-afternoon').doc(id).delete();
+    } catch (error) {
+        throw error;
+    }
+}
 export const deleteCustomerAppoint= async (id) => {
     try {
         await firestore.collection('complete-appointment').doc(id).delete();
