@@ -23,6 +23,9 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import Customer from "../models/customer";
 import { ScaleLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
+import InputBase from '@mui/material/InputBase';
+import Divider from '@mui/material/Divider';
+import SearchIcon from '@mui/icons-material/Search';
 import { getCustomersAdmin, getAdminMorning, getAdminAfter, getCustomer, deleteCustomerAdmin, addCustomerAppoint } from '../data/customerData';
 
 const firestore = firebase.firestore();
@@ -135,62 +138,6 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const EnhancedTableToolbar = (props) => {
-    const { numSelected } = props;
-
-  return (
-    <Toolbar
-      sx={{
-        pl: { sm: 2 },
-        pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-        }),
-      }}
-    >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-          style={{fontWeight:'bolder'}}
-        >
-          วันที่ {sessionStorage.histoDate.toString()}
-        </Typography>
-      )}
-
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
-    </Toolbar>
-  );
-};
-
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
-
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -203,7 +150,14 @@ export default function EnhancedTable() {
   const [customersMorn, setCustomersMorn] = useState([]);
   const [loading, setLoading] = useState(false);
   const [allReserveMorn, setAllReserveMorn] = useState('');
-
+  const [name, setName] = useState('');
+  const handleName = (event) => {
+  const regex = /^[\u0E00-\u0E7Fa-zA-Z\s']*$/
+  // thai and english characters only using regex
+    if(event.target.value === '' || regex.test(event.target.value) ){
+        setName(event.target.value);
+    }
+  }
 
   useEffect(() => {
       getlist();
@@ -235,6 +189,32 @@ export default function EnhancedTable() {
           throw error
       }
   }
+  const getCustomersSearch = async () => {
+    try {
+        const response = await firestore.collection('history/' + sessionStorage.histoDate.toString() + '/custo');
+        const data = await response.where('name', '==', name).get();
+        let array = [];
+        data.forEach(doc => {
+            const customer = new Customer(
+                doc.id,
+                doc.data().name,
+                doc.data().bdate,
+                doc.data().ssn,
+                doc.data().phone,
+                doc.data().email,
+                doc.data().place,
+                doc.data().date,
+                doc.data().time,
+                doc.data().detail,
+                doc.data().status
+            );
+            array.push(customer);
+        });
+        return array;
+    } catch (error) {
+        throw error
+    }
+  }
   const getlist = async () => {
       try {
           setLoading(true);
@@ -246,6 +226,19 @@ export default function EnhancedTable() {
           toast.error(error.message);
           setLoading(false);
       }
+  }
+
+  const getSearch = async () => {
+    try {
+        setLoading(true);
+        const listMorn = await getCustomersSearch();
+        setCustomersMorn(listMorn);
+        setAllReserveMorn(listMorn.length);
+        setLoading(false);
+    } catch (error) {
+        toast.error(error.message);
+        setLoading(false);
+    }
   }
 
   const handleRequestSort = (event, property) => {
@@ -311,8 +304,33 @@ const override = `
 
   return (
     <Box sx={{ width: '100%' }}>
+      <Toolbar>
+        <div style={{flexGrow: 1}}>
+        <Typography
+          sx={{ flex: '1 1 100%' }}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+          style={{fontWeight:'bolder'}}
+        >
+          วันที่ {sessionStorage.histoDate.toString()}
+        </Typography>
+        </div>
+          <div style={{float:'right'}}>
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            onChange={handleName}
+            value={name}
+            placeholder="ค้นหาด้วยชื่อผู้เช็คอิน"
+            inputProps={{ 'aria-label': 'search google maps' }}
+          />
+          <IconButton type="submit" sx={{ p: '10px' }} edge="end" aria-label="search">
+            <SearchIcon onClick={()=>{getSearch()}}/>
+          </IconButton>
+          </div>
+      </Toolbar>
+
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
