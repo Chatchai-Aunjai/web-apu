@@ -398,8 +398,8 @@ const Customers = () => {
                             </TableRow>
                         ) : (
                             <>
-                                {customersMorn.map((cust) => (
-                                    <TableRow key={cust.id}>
+                                {customersMorn.map((cust, index) => (
+                                    <TableRow key={cust.id} style ={ index % 2? { background : "white" }:{ background : "#F5F5F5" }}>
                                         <TableCell>{cust.name}</TableCell>
                                         <TableCell>{cust.phone}</TableCell>
                                         <TableCell>{cust.date}</TableCell>

@@ -387,6 +387,7 @@ const override = `
                       tabIndex={-1}
                       key={row.name}
                       selected={isItemSelected}
+                      style ={ index % 2? { background : "white" }:{ background : "#F5F5F5" }}
                     >
                       <TableCell padding="checkbox">
                         <Checkbox
