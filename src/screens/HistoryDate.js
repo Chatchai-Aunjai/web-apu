@@ -26,6 +26,7 @@ import { toast } from 'react-toastify';
 import InputBase from '@mui/material/InputBase';
 import Divider from '@mui/material/Divider';
 import SearchIcon from '@mui/icons-material/Search';
+import LinearProgress from '@mui/material/LinearProgress';
 import { getCustomersAdmin, getAdminMorning, getAdminAfter, getCustomer, deleteCustomerAdmin, addCustomerAppoint } from '../data/customerData';
 
 const firestore = firebase.firestore();
@@ -316,18 +317,19 @@ const override = `
           วันที่ {sessionStorage.histoDate.toString()}
         </Typography>
         </div>
-          <div style={{float:'right'}}>
-          <InputBase
-            sx={{ ml: 1, flex: 1 }}
-            onChange={handleName}
-            value={name}
-            placeholder="ค้นหาด้วยชื่อผู้เช็คอิน"
-            inputProps={{ 'aria-label': 'search google maps' }}
-          />
-          <IconButton type="submit" sx={{ p: '10px' }} edge="end" aria-label="search">
-            <SearchIcon onClick={()=>{getSearch()}}/>
-          </IconButton>
-          </div>
+        <div style={{float:'right'}}>
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          onChange={handleName}
+          value={name}
+          placeholder="ค้นหาด้วยชื่อผู้เช็คอิน"
+          inputProps={{ 'aria-label': 'search google maps' }}
+          
+        />
+        <IconButton type="submit" sx={{ p: '10px' }} edge="end" aria-label="search">
+          <SearchIcon onClick={()=>{getSearch()}}/>
+        </IconButton>
+      </div>  
       </Toolbar>
 
       <Paper sx={{ width: '100%', mb: 2 }}>
@@ -354,31 +356,6 @@ const override = `
                   const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
                   return (
-                    customersMorn.length === 0 ? (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.name)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.name}
-                      selected={isItemSelected}
-                    >
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                          <ScaleLoader
-                            css={override}
-                            size={150}
-                            color={"#eb4034"}
-                            loading={loading} />
-                        </TableCell>
-                        </TableRow>
-                    ) : (
-                    <>
                     <TableRow
                       hover
                       onClick={(event) => handleClick(event, row.name)}
@@ -411,9 +388,8 @@ const override = `
                       <TableCell align="right" style={{textAlign:'left'}}>{row.time}</TableCell>
                       <TableCell align="right" style={{textAlign:'left'}}>{row.status}</TableCell>
                     </TableRow>
-                    </>
+        
                   )
-                  );
                 })}
               {emptyRows > 0 && (
                 <TableRow
@@ -421,18 +397,14 @@ const override = `
                     height: (dense ? 33 : 53) * emptyRows,
                   }}
                 >
-                  <TableCell colSpan={6}>
-                  <ScaleLoader
-                        css={override}
-                        size={150}
-                        color={"#eb4034"}
-                        loading={loading} />
-                </TableCell>
                 </TableRow>
               )}
             </TableBody>
           </Table>
         </TableContainer>
+        {customersMorn.length === 0 ? (
+            <LinearProgress />
+        ) : (<></>)}
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
