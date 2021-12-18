@@ -144,7 +144,7 @@ const EditDefault = () => {
         },(error) => {
           store.addNotification({
             title: "ล้มเหลว!",
-            message: `แก้ไขกาตั้งค่าของการจองไม่สำเร็จ เนื่องจาก ${error}` ,
+            message: `ตั้งค่าการจองไม่สำเร็จ เนื่องจาก ${error}` ,
             type: "danger",
             insert: "top",
             container: "top-right",

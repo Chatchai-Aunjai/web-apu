@@ -20,7 +20,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-
+import { isMobileSafari, isSafari} from 'react-device-detect';
 const Routers = () => (
   <div>
     <Router>
@@ -70,6 +70,11 @@ function App() {
 
     setIsUserSignedIn(false)
   })
+  if(isMobileSafari || isSafari) {
+    return(
+      <h1>Uh oh! seems like we do not support this browser</h1>
+    )
+  }
   if (isUserSignedIn === true){
     return (
       <Router>
