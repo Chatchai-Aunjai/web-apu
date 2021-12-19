@@ -1,27 +1,30 @@
 {
   "files": {
-    "main.css": "/web-apu/static/css/main.a42c2ae7.chunk.css",
-    "main.js": "/web-apu/static/js/main.0220769f.chunk.js",
-    "main.js.map": "/web-apu/static/js/main.0220769f.chunk.js.map",
-    "runtime-main.js": "/web-apu/static/js/runtime-main.aa5d9629.js",
-    "runtime-main.js.map": "/web-apu/static/js/runtime-main.aa5d9629.js.map",
+    "main.css": "/web-apu/static/css/main.e9a447e7.chunk.css",
+    "main.js": "/web-apu/static/js/main.63105685.chunk.js",
+    "main.js.map": "/web-apu/static/js/main.63105685.chunk.js.map",
+    "runtime-main.js": "/web-apu/static/js/runtime-main.a013078c.js",
+    "runtime-main.js.map": "/web-apu/static/js/runtime-main.a013078c.js.map",
     "static/css/2.2fac6a24.chunk.css": "/web-apu/static/css/2.2fac6a24.chunk.css",
-    "static/js/2.b083a33c.chunk.js": "/web-apu/static/js/2.b083a33c.chunk.js",
-    "static/js/2.b083a33c.chunk.js.map": "/web-apu/static/js/2.b083a33c.chunk.js.map",
-    "static/js/3.50618bd1.chunk.js": "/web-apu/static/js/3.50618bd1.chunk.js",
-    "static/js/3.50618bd1.chunk.js.map": "/web-apu/static/js/3.50618bd1.chunk.js.map",
+    "static/js/2.3f2f2e92.chunk.js": "/web-apu/static/js/2.3f2f2e92.chunk.js",
+    "static/js/2.3f2f2e92.chunk.js.map": "/web-apu/static/js/2.3f2f2e92.chunk.js.map",
+    "static/js/3.38a528ba.chunk.js": "/web-apu/static/js/3.38a528ba.chunk.js",
+    "static/js/3.38a528ba.chunk.js.map": "/web-apu/static/js/3.38a528ba.chunk.js.map",
     "index.html": "/web-apu/index.html",
     "static/css/2.2fac6a24.chunk.css.map": "/web-apu/static/css/2.2fac6a24.chunk.css.map",
-    "static/css/main.a42c2ae7.chunk.css.map": "/web-apu/static/css/main.a42c2ae7.chunk.css.map",
-    "static/js/2.b083a33c.chunk.js.LICENSE.txt": "/web-apu/static/js/2.b083a33c.chunk.js.LICENSE.txt",
+    "static/css/main.e9a447e7.chunk.css.map": "/web-apu/static/css/main.e9a447e7.chunk.css.map",
+    "static/js/2.3f2f2e92.chunk.js.LICENSE.txt": "/web-apu/static/js/2.3f2f2e92.chunk.js.LICENSE.txt",
+    "static/media/Safari.4d2beefe.png": "/web-apu/static/media/Safari.4d2beefe.png",
+    "static/media/chrome.e3de0b0d.png": "/web-apu/static/media/chrome.e3de0b0d.png",
+    "static/media/edge.e8e28ce9.png": "/web-apu/static/media/edge.e8e28ce9.png",
     "static/media/error.9336417a.png": "/web-apu/static/media/error.9336417a.png",
     "static/media/kkulogo.cb762e90.png": "/web-apu/static/media/kkulogo.cb762e90.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.aa5d9629.js",
+    "static/js/runtime-main.a013078c.js",
     "static/css/2.2fac6a24.chunk.css",
-    "static/js/2.b083a33c.chunk.js",
-    "static/css/main.a42c2ae7.chunk.css",
-    "static/js/main.0220769f.chunk.js"
+    "static/js/2.3f2f2e92.chunk.js",
+    "static/css/main.e9a447e7.chunk.css",
+    "static/js/main.63105685.chunk.js"
   ]
 }
